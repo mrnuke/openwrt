@@ -5,10 +5,10 @@ PKG_NAME:=ipq-wifi
 PKG_RELEASE:=1
 
 PKG_SOURCE_PROTO:=git
-PKG_SOURCE_URL=$(PROJECT_GIT)/project/firmware/qca-wireless.git
+PKG_SOURCE_URL=https://github.com/mrnuke/firmware_qca-wireless
 PKG_SOURCE_DATE:=2023-03-16
-PKG_SOURCE_VERSION:=2dae61830c42ebdcc29a13048b81a0485d7b5b95
-PKG_MIRROR_HASH:=1c9b3fa2044de952e336a49b2864784b6e9cf3729fb05198f47ac4a71df13320
+PKG_SOURCE_VERSION:=0bebe37e212c811fb5d7db5e0daa589dec7e8c09
+PKG_MIRROR_HASH:=7e2a609bbdacdb7f0dbbd4f0e3fee94f599383855d0404e3c77aaed17a90c75f
 
 PKG_FLAGS:=nonshared
 
@@ -44,6 +44,7 @@ ALLWIFIBOARDS:= \
 	glinet_gl-s1300 \
 	linksys_ea8300 \
 	linksys_whw03v2 \
+	netgear_wax218 \
 	p2w_r619ac \
 	pakedge_wr-1 \
 	qnap_301w \
@@ -146,6 +147,7 @@ $(eval $(call generate-ipq-wifi-package,glinet_gl-ap1300,GL.iNet GL-AP1300))
 $(eval $(call generate-ipq-wifi-package,glinet_gl-s1300,GL.iNet GL-S1300))
 $(eval $(call generate-ipq-wifi-package,linksys_ea8300,Linksys EA8300))
 $(eval $(call generate-ipq-wifi-package,linksys_whw03v2,Linksys WHW03 V2))
+$(eval $(call generate-ipq-wifi-package,netgear_wax218,Netgear WAX218))
 $(eval $(call generate-ipq-wifi-package,p2w_r619ac,P&W R619AC))
 $(eval $(call generate-ipq-wifi-package,pakedge_wr-1,Pakedge WR-1))
 $(eval $(call generate-ipq-wifi-package,qnap_301w,QNAP 301w))
