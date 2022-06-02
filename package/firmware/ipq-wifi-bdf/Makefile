@@ -24,6 +24,7 @@ BOARD_IDS_AND_NAMES:= \
 	dynalink_dl-wrx36,Dynalink::DL-WRX36 \
 	edgecore_eap102,Edgecore::EAP102 \
 	edimax_cax1800,Edimax::CAX1800 \
+	netgear_wax218,Netgear::WAX218 \
 	qnap_301w,QNAP::301w \
 	redmi_ax6,Redmi::AX6 \
 	xiaomi_ax3600,Xiaomi::AX3600 \
