@@ -22,7 +22,7 @@ board_config_update
 
 lan_list=$(ls -1 -v -d /sys/class/net/lan* | xargs -n1 basename | xargs)
 ucidef_set_bridge_device switch
-ucidef_set_interface_lan "$lan_list"
+ucidef_set_interface_lan "$lan_list" "dhcp"
 
 lan_mac=""
 lan_mac_start=""
