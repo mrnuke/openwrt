@@ -1,0 +1,40 @@
+From 77b5801ade534bc979e6a8636b0a199799a592ad Mon Sep 17 00:00:00 2001
+From: Robert Marko <robimarko@gmail.com>
+Date: Sat, 4 Jun 2022 16:58:14 +0200
+Subject: [PATCH 1003/1018] v6.0: regulator: mp5416: alphabetically sort header
+ includes
+
+Sort the header include list alphabetically.
+
+Signed-off-by: Robert Marko <robimarko@gmail.com>
+Link: https://lore.kernel.org/r/20220604145816.47576-2-robimarko@gmail.com
+Signed-off-by: Mark Brown <broonie@kernel.org>
+---
+ drivers/regulator/mp5416.c | 6 +++---
+ 1 file changed, 3 insertions(+), 3 deletions(-)
+
+diff --git a/drivers/regulator/mp5416.c b/drivers/regulator/mp5416.c
+index 39cebec0edb6..d8245080df03 100644
+--- a/drivers/regulator/mp5416.c
++++ b/drivers/regulator/mp5416.c
+@@ -6,14 +6,14 @@
+ //
+ // Author: Saravanan Sekar <sravanhome@gmail.com>
+ 
++#include <linux/err.h>
++#include <linux/i2c.h>
++#include <linux/init.h>
+ #include <linux/kernel.h>
+ #include <linux/module.h>
+-#include <linux/init.h>
+-#include <linux/err.h>
+ #include <linux/platform_device.h>
+ #include <linux/regmap.h>
+ #include <linux/regulator/driver.h>
+-#include <linux/i2c.h>
+ 
+ #define MP5416_REG_CTL0			0x00
+ #define MP5416_REG_CTL1			0x01
+-- 
+2.37.1
+
