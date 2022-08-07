@@ -30,3 +30,14 @@ define Device/cp01-c1
 	SOC := ipq6018
 endef
 TARGET_DEVICES += cp01-c1
+
+define Device/tplink_eap610-outdoor
+	$(call Device/FitImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := TP-Link
+	DEVICE_MODEL := EAP610-Outdoor
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	SOC := ipq6018
+endef
+TARGET_DEVICES += tplink_eap610-outdoor
