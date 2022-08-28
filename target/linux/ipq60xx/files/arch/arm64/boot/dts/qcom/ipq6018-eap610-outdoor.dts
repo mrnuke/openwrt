@@ -89,6 +89,7 @@
 	status = "okay";
 	pinctrl-0 = <&mdio_pins>;
 	pinctrl-names = "default";
+	phy-reset-gpio = <&tlmm 0x4b GPIO_ACTIVE_HIGH>;
 
 	rtl8211f_4: ethernet-phy@4 {
 		reg = <4>;
