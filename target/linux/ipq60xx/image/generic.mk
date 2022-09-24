@@ -42,3 +42,12 @@ define Device/eap610-outdoor
 	IMAGE/nand-factory.ubi := append-ubi | qsdk-ipq-factory-nand
 endef
 TARGET_DEVICES += eap610-outdoor
+
+define Device/mr7350
+	$(call Device/FitImage)
+	DEVICE_VENDOR := Linksys
+	DEVICE_MODEL := MR7350
+	SOC := ipq6018
+	DEVICE_PACKAGES := kmod-leds-pca963x
+endef
+TARGET_DEVICES += mr7350
