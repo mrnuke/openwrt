@@ -110,7 +110,7 @@ index cf11c9aa5004..69d06dd4aeb8 100644
 +			.parent_hws = (const struct clk_hw *[]){
 +					&blsp1_qup6_i2c_apps_clk_src.clkr.hw },
 +			.num_parents = 1,
-+			.flags = CLK_SET_RATE_PARENT,
++			.flags = CLK_SET_RATE_PARENT | CLK_IGNORE_UNUSED,
 +			.ops = &clk_branch2_ops,
 +		},
 +	},
