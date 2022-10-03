@@ -1,0 +1,37 @@
+From d71ec8184236356c50088b00b2417fb142e72bd9 Mon Sep 17 00:00:00 2001
+From: Sander Vanheule <sander@svanheule.net>
+Date: Sun, 10 Jul 2022 11:31:53 +0200
+Subject: [PATCH] leds: add Realtek LED hardware directory
+MIME-Version: 1.0
+Content-Type: text/plain; charset=UTF-8
+Content-Transfer-Encoding: 8bit
+
+Realtek LED hardware peripherals share some common features. They are
+typically controlled through a register field, a few bits in size. These
+allow the LED to be turned off or on, or toggled at one of a number of
+intervals.
+
+Signed-off-by: Sander Vanheule <sander@svanheule.net>
+---
+
+--- a/drivers/leds/Kconfig
++++ b/drivers/leds/Kconfig
+@@ -944,4 +944,7 @@ config LEDS_UBNT_LEDBAR
+ comment "LED Triggers"
+ source "drivers/leds/trigger/Kconfig"
+ 
++comment "Realtek LED drivers"
++source "drivers/leds/realtek/Kconfig"
++
+ endif # NEW_LEDS
+--- a/drivers/leds/Makefile
++++ b/drivers/leds/Makefile
+@@ -107,5 +107,8 @@ obj-$(CONFIG_LEDS_USER)			+= uleds.o
+ # LED Triggers
+ obj-$(CONFIG_LEDS_TRIGGERS)		+= trigger/
+ 
++# Realtek LED drivers
++obj-y					+= realtek/
++
+ # LED Blink
+ obj-y					+= blink/

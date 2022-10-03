@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: GPL-2.0-only
+menuconfig LEDS_RTL
+	bool "Realtek LED support"
+	help
+	  Say Y to enable support for LED peripherals found on Realtek switch
+	  SoCs.
+
+if LEDS_RTL
+
+endif # LED_RTL
