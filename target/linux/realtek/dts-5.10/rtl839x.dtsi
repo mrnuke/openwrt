@@ -246,6 +246,11 @@
 		compatible = "realtek,cypress-switchcore", "syscon";
 		reg = <0x1b000000 0x10000>;
 
+		hw_sys_led: sys-led {
+			compatible = "realtek,cypress-sys-led";
+			status = "disabled";
+		};
+
 		pinctrl: pinctrl {
 			compatible = "realtek,cypress-pinctrl";
 
