@@ -220,6 +220,11 @@
 		compatible = "realtek,maple-switchcore", "syscon";
 		reg = <0x1b000000 0x10000>;
 
+		hw_sys_led: sys-led {
+			compatible = "realtek,maple-sys-led";
+			status = "disabled";
+		};
+
 		pinctrl {
 			compatible = "realtek,maple-pinctrl";
 
