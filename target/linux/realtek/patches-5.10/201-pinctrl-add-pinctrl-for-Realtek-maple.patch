@@ -1,0 +1,49 @@
+From 0efa8d564f27519d20fed39f5d650e50cbc34a0b Mon Sep 17 00:00:00 2001
+From: Sander Vanheule <sander@svanheule.net>
+Date: Mon, 11 Jul 2022 21:37:17 +0200
+Subject: pinctrl: add pinctrl for Realtek switch SoCs
+
+Since control bits for different pin muxes are scattered throughout the
+switch core's register space, pin control features are provided by a
+table of regmap fields. This should be flexible enough to allow support
+for currently unsupported pin muxes, and newer SoC generations providing
+similar features.
+
+This driver add initial support for Maple and Cypress managed gigabit
+switch SoCs, with RTL838xM and RTL839xM part numbers. The fast ethernet
+switch SoCs from these parts series, with numbers RTL833xM and RTL835xM,
+should also be supported, but have not been tested.
+
+Signed-off-by: Sander Vanheule <sander@svanheule.net>
+---
+
+--- a/drivers/pinctrl/Kconfig
++++ b/drivers/pinctrl/Kconfig
+@@ -215,6 +215,17 @@ config PINCTRL_ROCKCHIP
+ 	select MFD_SYSCON
+ 	select OF_GPIO
+ 
++config PINCTRL_RTL_SWITCHCORE
++	bool "Realtek switch core pinctrl driver"
++	default MFD_REALTEK_SWITCHCORE
++	depends on MFD_REALTEK_SWITCHCORE || COMPILE_TEST
++	select PINMUX
++	select GENERIC_PINMUX_FUNCTIONS
++	select MFD_SYSCON
++	help
++	  Driver for pin control fields in RTL83xx and RTL93xx managed ethernet
++	  switch SoCs.
++
+ config PINCTRL_SINGLE
+ 	tristate "One-register-per-pin type device tree based pinctrl driver"
+ 	depends on OF
+--- a/drivers/pinctrl/Makefile
++++ b/drivers/pinctrl/Makefile
+@@ -30,6 +30,7 @@ obj-$(CONFIG_PINCTRL_PALMAS)	+= pinctrl-
+ obj-$(CONFIG_PINCTRL_PIC32)	+= pinctrl-pic32.o
+ obj-$(CONFIG_PINCTRL_PISTACHIO)	+= pinctrl-pistachio.o
+ obj-$(CONFIG_PINCTRL_ROCKCHIP)	+= pinctrl-rockchip.o
++obj-$(CONFIG_PINCTRL_RTL_SWITCHCORE) += pinctrl-rtl-switchcore.o
+ obj-$(CONFIG_PINCTRL_SINGLE)	+= pinctrl-single.o
+ obj-$(CONFIG_PINCTRL_SIRF)	+= sirf/
+ obj-$(CONFIG_PINCTRL_SX150X)	+= pinctrl-sx150x.o
