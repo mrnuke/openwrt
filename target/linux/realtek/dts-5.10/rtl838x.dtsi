@@ -216,33 +216,22 @@
 		};
 	};
 
-	pinmux: pinmux@1b001000 {
-		compatible = "pinctrl-single";
-		reg = <0x1b001000 0x4>;
+	switchcore: switchcore-bus@1b000000 {
+		compatible = "realtek,maple-switchcore", "syscon";
+		reg = <0x1b000000 0x10000>;
 
-		pinctrl-single,bit-per-mux;
-		pinctrl-single,register-width = <32>;
-		pinctrl-single,function-mask = <0x1>;
-		#pinctrl-cells = <2>;
+		pinctrl {
+			compatible = "realtek,maple-pinctrl";
 
-		enable_uart1: pinmux_enable_uart1 {
-			pinctrl-single,bits = <0x0 0x10 0x10>;
-		};
-	};
+			pinmux_disable_sys_led: pinmux-sys-led-gpio {
+				groups = "sys-led";
+				function = "gpio";
+			};
 
-	/* LED_GLB_CTRL */
-	pinmux_led: pinmux@1b00a000 {
-		compatible = "pinctrl-single";
-		reg = <0x1b00a000 0x4>;
-
-		pinctrl-single,bit-per-mux;
-		pinctrl-single,register-width = <32>;
-		pinctrl-single,function-mask = <0x1>;
-		#pinctrl-cells = <2>;
-
-		/* enable GPIO 0 */
-		pinmux_disable_sys_led: disable_sys_led {
-			pinctrl-single,bits = <0x0 0x0 0x8000>;
+			enable_uart1: pinmux-uart1 {
+				groups = "uart1";
+				function = "uart1";
+			};
 		};
 	};
 
