@@ -129,6 +129,7 @@
 	status = "okay";
 	pinctrl-0 = <&mdio_pins>;
 	pinctrl-names = "default";
+	reset-gpios = <&tlmm 75 GPIO_ACTIVE_LOW>;
 
 	phy_0: ethernet-phy@0 {
 		reg = <0>;
