@@ -40,15 +40,6 @@
 			linux,code = <KEY_WPS_BUTTON>;
 		};
 	};
-//
-// 	leds {
-// 		compatible = "gpio-leds";
-//
-// 		led_power: led-1 {
-// 			label = "green:power";
-// 			gpios = <&tlmm 36 GPIO_ACTIVE_HIGH>;
-// 		};
-// 	};
 };
 
 &blsp1_uart3 {
@@ -58,6 +49,12 @@
 };
 
 &tlmm {
+	i2c_1_pins: i2c-1-pins {
+		pins = "gpio42", "gpio43";
+		function = "blsp2_i2c";
+		drive-strength = <8>;
+	};
+
 	mdio_pins: mdio-pins {
 		mdc {
 			pins = "gpio64";
@@ -211,4 +208,30 @@
 
 &wifi {
 	status = "okay";
+};
+
+&i2c_1 {
+	pinctrl-0 = <&i2c_1_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	pca9632: pca9632 {
+		compatible = "nxp,pca9632";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0x62>;
+
+		red@0 {
+			label = "red";
+			reg = <0>;
+		};
+		green@1 {
+			label = "green";
+			reg = <1>;
+		};
+		blue@2 {
+			label = "blue";
+			reg = <2>;
+		};
+	};
 };

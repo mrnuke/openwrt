@@ -48,5 +48,6 @@ define Device/mr7350
 	DEVICE_VENDOR := Linksys
 	DEVICE_MODEL := MR7350
 	SOC := ipq6018
+	DEVICE_PACKAGES := kmod-leds-pca963x
 endef
 TARGET_DEVICES += mr7350
