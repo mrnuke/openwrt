@@ -25,15 +25,21 @@
 		stdout-path = "serial0:115200n8";
 	};
 
-// 	keys {
-// 		compatible = "gpio-keys";
-//
-// 		reset {
-// 			label = "reset";
-// 			gpios = <&tlmm 9 GPIO_ACTIVE_LOW>;
-// 			linux,code = <KEY_RESTART>;
-// 		};
-// 	};
+	keys {
+		compatible = "gpio-keys";
+
+		reset {
+			label = "reset";
+			gpios = <&tlmm 57 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_RESTART>;
+		};
+
+		wps {
+			label = "reset";
+			gpios = <&tlmm 56 GPIO_ACTIVE_LOW>;
+			linux,code = <KEY_WPS_BUTTON>;
+		};
+	};
 //
 // 	leds {
 // 		compatible = "gpio-leds";
