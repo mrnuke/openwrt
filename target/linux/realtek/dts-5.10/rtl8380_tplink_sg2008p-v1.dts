@@ -26,3 +26,29 @@
 &port26 {
 	status = "disabled";
 };
+
+&switchcore {
+	port-leds {
+		led@12.2 {
+			reg = <12 2 0>;
+			label = "green:lan4_poe_status";
+		};
+		led@13.2 {
+			reg = <13 2 0>;
+			label = "green:lan3_poe_status";
+		};
+		led@14.2 {
+			reg = <14 2 0>;
+			label = "green:lan2_poe_status";
+		};
+		led@15.2 {
+			reg = <15 2 0>;
+			label = "green:lan1_poe_status";
+		};
+
+		poe_max_led: led@20.1 {
+			reg = <20 1 0>;
+			label = "green:poe-max";
+		};
+	};
+};
