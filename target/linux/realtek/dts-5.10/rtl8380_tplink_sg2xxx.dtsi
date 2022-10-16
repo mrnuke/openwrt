@@ -4,6 +4,7 @@
 
 #include <dt-bindings/input/input.h>
 #include <dt-bindings/gpio/gpio.h>
+#include <dt-bindings/leds/realtek-led-trigger.h>
 
 / {
 	aliases {
@@ -168,7 +169,6 @@
 
 		SWITCH_SFP_PORT(24, 9, 1000base-x)
 		SWITCH_SFP_PORT(26, 10, 1000base-x)
-
 		port@28 {
 			ethernet = <&ethernet0>;
 			reg = <28>;
@@ -178,6 +178,191 @@
 				speed = <1000>;
 				full-duplex;
 			};
+		};
+	};
+};
+
+&switchcore {
+	port-leds {
+		compatible = "realtek,maple-port-led";
+		#address-cells = <3>;
+		#size-cells = <0>;
+
+		realtek,output-mode = "serial";
+
+		led@8.0 {
+			reg = <8 0 0>;
+			label = "amber:lan8_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@8.1 {
+			reg = <8 1 0>;
+			label = "green:lan8_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@9.0 {
+			reg = <9 0 0>;
+			label = "amber:lan7_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@9.1 {
+			reg = <9 1 0>;
+			label = "green:lan7_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@10.0 {
+			reg = <10 0 0>;
+			label = "amber:lan6_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@10.1 {
+			reg = <10 1 0>;
+			label = "green:lan6_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@11.0 {
+			reg = <11 0 0>;
+			label = "amber:lan5_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@11.1 {
+			reg = <11 1 0>;
+			label = "green:lan5_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@12.0 {
+			reg = <12 0 0>;
+			label = "amber:lan4_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@12.1 {
+			reg = <12 1 0>;
+			label = "green:lan4_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@13.0 {
+			reg = <13 0 0>;
+			label = "amber:lan3_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@13.1 {
+			reg = <13 1 0>;
+			label = "green:lan3_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@14.0 {
+			reg = <14 0 0>;
+			label = "amber:lan2_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@14.1 {
+			reg = <14 1 0>;
+			label = "green:lan2_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@15.0 {
+			reg = <15 0 0>;
+			label = "amber:lan1_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@15.1 {
+			reg = <15 1 0>;
+			label = "green:lan1_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+
+		led@24.0 {
+			reg = <24 0 0>;
+			label = "amber:sfp2_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@24.1 {
+			reg = <24 1 0>;
+			label = "green:sfp2_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@26.0 {
+			reg = <26 0 0>;
+			label = "amber:sfp1_10-100";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@26.1 {
+			reg = <26 1 0>;
+			label = "green:sfp1_1000";
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@24.2 {
+			reg = <24 2 0>;
+			label = ":sfp2_laser";
+			linux,default-trigger = "default-on";
+		};
+		led@26.2 {
+			reg = <26 2 0>;
+			label = ":sfp1_laser";
+			linux,default-trigger = "default-on";
+		};
+
+		led@8.2 {
+			reg = <12 2 0>;
+			label = "green:lan8_poe_status";
+		};
+		led@9.2 {
+			reg = <13 2 0>;
+			label = "green:lan7_poe_status";
+		};
+		led@10.2 {
+			reg = <14 2 0>;
+			label = "green:lan6_poe_status";
+		};
+		led@11.2 {
+			reg = <15 2 0>;
+			label = "green:lan5_poe_status";
+		};
+		led@12.2 {
+			reg = <12 2 0>;
+			label = "green:lan4_poe_status";
+		};
+		led@13.2 {
+			reg = <13 2 0>;
+			label = "green:lan3_poe_status";
+		};
+		led@14.2 {
+			reg = <14 2 0>;
+			label = "green:lan2_poe_status";
+		};
+		led@15.2 {
+			reg = <15 2 0>;
+			label = "green:lan1_poe_status";
+		};
+
+		system_led: led@20.0 {
+			reg = <20 0 0>;
+			label = "green:system";
+		};
+
+		poe_max_led: led@20.1 {
+			reg = <20 1 0>;
+			label = "green:poe-max";
 		};
 	};
 };
