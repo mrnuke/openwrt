@@ -137,7 +137,6 @@
 
 	phy_0: ethernet-phy@0 {
 		reg = <0>;
-// 		reset-gpios = <&tlmm 77 GPIO_ACTIVE_LOW>;
 	};
 
 	phy_1: ethernet-phy@1 {
