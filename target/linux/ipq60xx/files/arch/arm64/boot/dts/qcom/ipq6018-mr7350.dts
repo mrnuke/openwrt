@@ -15,10 +15,10 @@
 
 	aliases {
 		serial0 = &blsp1_uart3;
-// 		led-boot = &led_power;
-// 		led-failsafe = &led_power;
-// 		led-running = &led_power;
-// 		led-upgrade = &led_power;
+		led-boot = &led_blue;
+		led-failsafe = &led_green;
+		led-running = &led_blue;
+		led-upgrade = &led_red;
 	};
 
 	chosen {
@@ -222,15 +222,15 @@
 		#size-cells = <0>;
 		reg = <0x62>;
 
-		red@0 {
+		led_red: red@0 {
 			label = "red";
 			reg = <0>;
 		};
-		green@1 {
+		led_green: green@1 {
 			label = "green";
 			reg = <1>;
 		};
-		blue@2 {
+		led_blue: blue@2 {
 			label = "blue";
 			reg = <2>;
 		};
