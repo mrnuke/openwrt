@@ -1,0 +1,7 @@
+#!/bin/sh
+
+config_get rtl_hw_trigger $1 rtl_hw_trigger
+logger -t led-trigger "realtek-switchport: trigger$trigger rtl_hw_trigger=$rtl_hw_trigger"
+
+echo $rtl_hw_trigger > /sys/class/leds/${sysfs}/rtl_hw_trigger 2> /dev/null
+echo $trigger > /sys/class/leds/${sysfs}/trigger 2> /dev/null

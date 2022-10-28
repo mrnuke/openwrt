@@ -5,7 +5,30 @@ board=$(board_name)
 
 board_config_update
 
+ucidef_set_led_rtl_hwtrigger() {
+	local rtl_hw_trigger="$3"
+
+	_ucidef_set_led_common "$1" "$1" "$2"
+	json_add_string type realtek-switchport
+	json_add_string trigger realtek-switchport
+	json_add_string rtl_hw_trigger "$rtl_hw_trigger"
+
+	json_select ..
+	json_select ..
+}
+
+tplink_set_hw_leds() {
+	for port in $(seq 1 8); do
+		ucidef_set_led_rtl_hwtrigger "lan$port.0" amber:lan"$port"_10-100 0x0f
+		ucidef_set_led_rtl_hwtrigger "lan$port.1" green:lan"$port"_1000 0x13
+	done
+}
+
 case $board in
+tplink,sg2008p-v1|\
+tplink,sg2210p-v3)
+	tplink_set_hw_leds
+	;;
 esac
 
 board_config_flush
