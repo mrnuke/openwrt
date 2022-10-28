@@ -467,6 +467,14 @@ generate_led() {
 				set system.$cfg.delayoff='$delayoff'
 			EOF
 		;;
+		realtek-switchport)
+			local rtl_hw_trigger
+			json_get_vars rtl_hw_trigger
+			uci -q batch <<-EOF
+				set system.$cfg.trigger='$type'
+				set system.$cfg.rtl_hw_trigger='$rtl_hw_trigger'
+			EOF
+		;;
 	esac
 
 	json_select ..
