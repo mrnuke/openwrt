@@ -2,6 +2,7 @@
 
 #include "rtl8380_netgear_gigabit_1xx.dtsi"
 #include <dt-bindings/leds/common.h>
+#include <dt-bindings/leds/realtek-led-trigger.h>
 
 / {
 	compatible = "netgear,gs110tpp-v1", "realtek,rtl838x-soc";
@@ -53,5 +54,196 @@
 	ports {
 		SWITCH_PORT(16, 9, qsgmii)
 		SWITCH_PORT(17, 10, qsgmii)
+	};
+};
+
+&switchcore {
+	port-leds {
+		compatible = "realtek,maple-port-led";
+		#address-cells = <3>;
+		#size-cells = <0>;
+
+		realtek,output-mode = "serial";
+
+		led@8.0.0 {
+			reg = <8 0 0>;
+			label = "green:lan-1";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <1>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@8.1.0 {
+			reg = <8 1 0>;
+			label = "amber:lan-1";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <1>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@9.0.0 {
+			reg = <9 0 0>;
+			label = "green:lan-2";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <2>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@9.1.0 {
+			reg = <9 1 0>;
+			label = "amber:lan-2";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <2>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@10.0.0 {
+			reg = <10 0 0>;
+			label = "green:lan-3";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <3>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@10.1.0 {
+			reg = <10 1 0>;
+			label = "amber:lan-3";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <3>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@11.0.0 {
+			reg = <11 0 0>;
+			label = "green:lan-4";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <4>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@11.1.0 {
+			reg = <11 1 0>;
+			label = "amber:lan-4";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <4>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@12.0.0 {
+			reg = <12 0 0>;
+			label = "green:lan-5";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <5>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@12.1.0 {
+			reg = <12 1 0>;
+			label = "amber:lan-5";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <5>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@13.0.0 {
+			reg = <13 0 0>;
+			label = "green:lan-6";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <6>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@13.1.0 {
+			reg = <13 1 0>;
+			label = "amber:lan-6";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <6>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@14.0.0 {
+			reg = <14 0 0>;
+			label = "green:lan-7";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <7>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@14.1.0 {
+			reg = <14 1 0>;
+			label = "amber:lan-7";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <7>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@15.0.0 {
+			reg = <15 0 0>;
+			label = "green:lan-8";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <8>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@15.1.0 {
+			reg = <15 1 0>;
+			label = "amber:lan-8";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <8>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@16.0.0 {
+			reg = <16 0 0>;
+			label = "green:lan-9";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <9>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@16.1.0 {
+			reg = <16 1 0>;
+			label = "amber:lan-9";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <9>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
+		led@17.0.0 {
+			reg = <17 0 0>;
+			label = "green:lan-10";
+			color = <LED_COLOR_ID_GREEN>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <10>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_1000)>;
+		};
+		led@17.1.0 {
+			reg = <17 1 0>;
+			label = "amber:lan-10";
+			color = <LED_COLOR_ID_AMBER>;
+			function = LED_FUNCTION_LAN;
+			function-enumerator = <10>;
+			linux,default-trigger = "realtek-switchport";
+			realtek,port-led-trigger = <(RTL_LED_ACT | RTL_LED_LINK_10_100)>;
+		};
 	};
 };
