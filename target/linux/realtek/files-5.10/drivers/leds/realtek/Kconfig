@@ -7,6 +7,15 @@ menuconfig LEDS_RTL
 
 if LEDS_RTL
 
+config LEDS_RTL_SWITCHCORE_PORT
+	bool "Realtek switch SoC port LED support"
+	default MFD_REALTEK_SWITCHCORE
+	depends on LEDS_CLASS
+	depends on MFD_REALTEK_SWITCHCORE || COMPILE_TEST
+	select MFD_SYSCON
+	help
+	  This option enables support for Realtek switch SoC port LEDs.
+
 config LEDS_RTL_SWITCHCORE_SYSTEM
 	bool "Realtek switch SoC system LED support"
 	default MFD_REALTEK_SWITCHCORE
