@@ -252,37 +252,27 @@
 
 	};
 
-	pinmux@1b000004 {
-		compatible = "pinctrl-single";
-		reg = <0x1b000004 0x4>;
+	switchcore: switchcore-bus@1b000000 {
+		compatible = "realtek,cypress-switchcore", "syscon";
+		reg = <0x1b000000 0x10000>;
 
-		pinctrl-single,bit-per-mux;
-		pinctrl-single,register-width = <32>;
-		pinctrl-single,function-mask = <0x1>;
-		#pinctrl-cells = <2>;
+		pinctrl: pinctrl {
+			compatible = "realtek,cypress-pinctrl";
 
-		enable_uart1: pinmux_enable_uart1 {
-			pinctrl-single,bits = <0x0 0x1 0x3>;
-		};
+			enable_uart1: pinmux-jtag-uart1 {
+				groups = "jtag";
+				function = "uart1";
+			};
 
-		disable_jtag: pinmux_disable_jtag {
-			pinctrl-single,bits = <0x0 0x2 0x3>;
-		};
-	};
+			disable_jtag: pinmux-jtag-gpio {
+				groups = "jtag";
+				function = "gpio";
+			};
 
-	/* LED_GLB_CTRL */
-	pinmux@1b0000e4 {
-		compatible = "pinctrl-single";
-		reg = <0x1b0000e4 0x4>;
-
-		pinctrl-single,bit-per-mux;
-		pinctrl-single,register-width = <32>;
-		pinctrl-single,function-mask = <0x1>;
-		#pinctrl-cells = <2>;
-
-		/* enable GPIO 0 */
-		pinmux_disable_sys_led: disable_sys_led {
-			pinctrl-single,bits = <0x0 0x0 0x4000>;
+			pinmux_disable_sys_led: pinmux-sysled-gpio {
+				groups = "sys-led";
+				function = "gpio";
+			};
 		};
 	};
 
