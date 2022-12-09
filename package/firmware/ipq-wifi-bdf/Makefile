@@ -37,6 +37,11 @@ define install-bdf
 		$(1)/lib/firmware/ath11k/$(3)/
 endef
 
+define Package/ath11k-vbdf-ipq6018
+$(Package/ipq-bdf-default)
+  TITLE:=ath11k board files for IPQ6018 devices
+endef
+
 define add-bdf-package
   define Package/ath11k-wifi-$(1)
     $(call Package/ipq-bdf-default)
@@ -60,3 +65,12 @@ $(foreach ID_NAME,$(BOARD_IDS_AND_NAMES), \
 	$(eval $(call add-bdf-package,$(BOARD_ID),$(NAME))) \
 	$(eval $(call BuildPackage,ath11k-wifi-$(BOARD_ID))) \
 )
+
+define Package/ath11k-vbdf-ipq6018/install
+	$(INSTALL_DIR) $(1)/lib/firmware/ath11k/IPQ6018/hw1.0
+	$(INSTALL_DATA) \
+		$(PKG_BUILD_DIR)/IPQ6018/hw1.0/*-board-2.bin \
+		$(1)/lib/firmware/ath11k/IPQ6018/hw1.0/
+endef
+
+$(eval $(call BuildPackage,ath11k-vbdf-ipq6018))
