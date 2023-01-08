@@ -31,7 +31,7 @@ define Device/cp01-c1
 endef
 TARGET_DEVICES += cp01-c1
 
-define Device/eap610-outdoor
+define Device/tplink_eap610-outdoor
 	$(call Device/FitImage)
 	$(call Device/UbiFit)
 	DEVICE_VENDOR := TP-Link
@@ -40,7 +40,7 @@ define Device/eap610-outdoor
 	PAGESIZE := 2048
 	SOC := ipq6018
 endef
-TARGET_DEVICES += eap610-outdoor
+TARGET_DEVICES += tplink_eap610-outdoor
 
 define Device/linksys_mr7350
 	$(call Device/FitImage)
