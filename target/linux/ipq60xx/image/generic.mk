@@ -39,6 +39,11 @@ define Device/eap610-outdoor
 	BLOCKSIZE := 128k
 	PAGESIZE := 2048
 	SOC := ipq6018
+	IMAGE/nand-factory.ubi := append-ubi | tplink-image-2022
+	TPLINK_SUPPORT_STRING := SupportList: \
+		EAP610-Outdoor(TP-Link|UN|AX1800-D):1.0 \
+		EAP610-Outdoor(TP-Link|JP|AX1800-D):1.0 \
+		EAP610-Outdoor(TP-Link|CA|AX1800-D):1.0
 endef
 TARGET_DEVICES += eap610-outdoor
 
