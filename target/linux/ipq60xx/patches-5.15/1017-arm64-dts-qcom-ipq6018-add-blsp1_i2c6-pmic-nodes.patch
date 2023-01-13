@@ -1,0 +1,53 @@
+From 822d0486827683e51ae6e70b711341f12b6d9a20 Mon Sep 17 00:00:00 2001
+From: Dirk Buchwalder <buchwalder@posteo.de>
+Date: Sat, 31 Dec 2022 20:34:16 +0200
+Subject: [PATCH 1017/1018] arm64: dts: qcom: ipq6018: add blsp1_i2c6 & pmic
+ nodes
+
+---
+ arch/arm64/boot/dts/qcom/ipq6018.dtsi | 29 +++++++++++++++++++++++++++
+ 1 file changed, 29 insertions(+)
+
+diff --git a/arch/arm64/boot/dts/qcom/ipq6018.dtsi b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
+index 691a7835cc0f..37144619bc66 100644
+--- a/arch/arm64/boot/dts/qcom/ipq6018.dtsi
++++ b/arch/arm64/boot/dts/qcom/ipq6018.dtsi
+@@ -361,6 +361,35 @@ i2c_1: i2c@78b7000 { /* BLSP1 QUP2 */
+ 			status = "disabled";
+ 		};
+ 
++		blsp1_i2c6: i2c@78ba000 {
++			compatible = "qcom,i2c-qup-v2.2.1";
++			#address-cells = <1>;
++			#size-cells = <0>;
++			reg = <0x0 0x078ba000 0x0 0x600>;
++			interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH>;
++			clocks = <&gcc GCC_BLSP1_QUP6_I2C_APPS_CLK>,
++				 <&gcc GCC_BLSP1_AHB_CLK>;
++			clock-names = "core", "iface";
++			clock-frequency = <400000>;
++			dmas = <&blsp_dma 22>, <&blsp_dma 23>;
++			dma-names = "tx", "rx";
++			status = "okay";
++	
++			pmic@69 {
++				compatible = "mps,mp5496";
++				reg = <0x69>;
++
++				regulators {
++				ipq6018_s2: buck2 {
++					regulator-name = "buck2";
++					regulator-min-microvolt = <587500>;
++					regulator-max-microvolt = <1100000>;
++					regulator-always-on;
++					};
++				};
++			};
++		};
++
+ 		qpic_bam: dma-controller@7984000 {
+ 			compatible = "qcom,bam-v1.7.0";
+ 			reg = <0x0 0x07984000 0x0 0x1a000>;
+-- 
+2.37.1
+
