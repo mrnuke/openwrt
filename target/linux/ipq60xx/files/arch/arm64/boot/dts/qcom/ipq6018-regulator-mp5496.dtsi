@@ -1,0 +1,34 @@
+/{
+	/delete-node/ rpm-glink;
+};
+
+&tlmm {
+	i2c6_pins: i2c6-pins {
+		mdc {
+			pins = "gpio46", "gpio47";
+			function = "blsp5_i2c";
+			drive-strength = <8>;
+			bias-pull-up;
+		};
+	};
+};
+
+&blsp1_i2c6 {
+	pinctrl-0 = <&i2c6_pins>;
+	pinctrl-names = "default";
+	status = "okay";
+
+	pmic@69 {
+		compatible = "mps,mp5496";
+		reg = <0x69>;
+
+		regulators {
+			ipq6018_s2: buck2 {
+				regulator-name = "buck2";
+				regulator-min-microvolt = <587500>;
+				regulator-max-microvolt = <1100000>;
+				regulator-always-on;
+			};
+		};
+	};
+};
