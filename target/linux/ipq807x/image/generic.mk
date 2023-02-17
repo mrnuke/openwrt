@@ -26,7 +26,7 @@ define Device/dynalink_dl-wrx36
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@rt5010w-d350-rev0
 	SOC := ipq8072
-	DEVICE_PACKAGES := ipq-wifi-dynalink_dl-wrx36
+	DEVICE_PACKAGES := ath11k-wifi-dynalink_dl-wrx36
 endef
 TARGET_DEVICES += dynalink_dl-wrx36
 
@@ -39,7 +39,7 @@ define Device/edgecore_eap102
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@ac02
 	SOC := ipq8071
-	DEVICE_PACKAGES := ipq-wifi-edgecore_eap102
+	DEVICE_PACKAGES := ath11k-wifi-edgecore_eap102
 	IMAGE/factory.ubi := append-ubi | qsdk-ipq-factory-nand
 endef
 TARGET_DEVICES += edgecore_eap102
@@ -53,7 +53,7 @@ define Device/edimax_cax1800
 	PAGESIZE := 2048
 	DEVICE_DTS_CONFIG := config@ac03
 	SOC := ipq8070
-	DEVICE_PACKAGES := ipq-wifi-edimax_cax1800
+	DEVICE_PACKAGES := ath11k-wifi-edimax_cax1800
 endef
 TARGET_DEVICES += edimax_cax1800
 
@@ -68,7 +68,7 @@ define Device/qnap_301w
 	IMAGES += factory.bin sysupgrade.bin
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | pad-to 64k
 	IMAGE/sysupgrade.bin/squashfs := append-rootfs | pad-to 64k | sysupgrade-tar rootfs=$$$$@ | append-metadata
-	DEVICE_PACKAGES := ipq-wifi-qnap_301w e2fsprogs kmod-fs-ext4 losetup
+	DEVICE_PACKAGES := ath11k-wifi-qnap_301w e2fsprogs kmod-fs-ext4 losetup
 endef
 TARGET_DEVICES += qnap_301w
 
@@ -76,7 +76,7 @@ define Device/redmi_ax6
 	$(call Device/xiaomi_ax3600)
 	DEVICE_VENDOR := Redmi
 	DEVICE_MODEL := AX6
-	DEVICE_PACKAGES := ipq-wifi-redmi_ax6
+	DEVICE_PACKAGES := ath11k-wifi-redmi_ax6
 endef
 TARGET_DEVICES += redmi_ax6
 
@@ -90,7 +90,7 @@ define Device/xiaomi_ax3600
 	DEVICE_DTS_CONFIG := config@ac04
 	SOC := ipq8071
 	KERNEL_SIZE := 36608k
-	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax3600 kmod-ath10k-ct-smallbuffers ath10k-firmware-qca9887-ct
+	DEVICE_PACKAGES := ath11k-wifi-xiaomi_ax3600 kmod-ath10k-ct-smallbuffers ath10k-firmware-qca9887-ct
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
 	ARTIFACTS := initramfs-factory.ubi
 	ARTIFACT/initramfs-factory.ubi := append-image-stage initramfs-uImage.itb | ubinize-kernel
@@ -108,7 +108,7 @@ define Device/xiaomi_ax9000
 	DEVICE_DTS_CONFIG := config@hk14
 	SOC := ipq8072
 	KERNEL_SIZE := 57344k
-	DEVICE_PACKAGES := ipq-wifi-xiaomi_ax9000 kmod-ath11k-pci ath11k-firmware-qcn9074 \
+	DEVICE_PACKAGES := ath11k-wifi-xiaomi_ax9000 kmod-ath11k-pci ath11k-firmware-qcn9074 \
 	kmod-ath10k-ct ath10k-firmware-qca9887-ct
 ifneq ($(CONFIG_TARGET_ROOTFS_INITRAMFS),)
 	ARTIFACTS := initramfs-factory.ubi
@@ -128,6 +128,6 @@ define Device/zyxel_nbg7815
 	IMAGES += factory.bin sysupgrade.bin
 	IMAGE/factory.bin := append-rootfs | pad-rootfs | pad-to 64k
 	IMAGE/sysupgrade.bin/squashfs := append-rootfs | pad-to 64k | sysupgrade-tar rootfs=$$$$@ | append-metadata
-	DEVICE_PACKAGES := ipq-wifi-zyxel_nbg7815 kmod-ath11k-pci e2fsprogs kmod-fs-ext4 losetup kmod-hwmon-tmp103
+	DEVICE_PACKAGES := ath11k-wifi-zyxel_nbg7815 kmod-ath11k-pci e2fsprogs kmod-fs-ext4 losetup kmod-hwmon-tmp103
 endef
 TARGET_DEVICES += zyxel_nbg7815
