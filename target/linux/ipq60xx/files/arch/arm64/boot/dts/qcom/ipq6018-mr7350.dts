@@ -50,7 +50,7 @@
 };
 
 &tlmm {
-	i2c_1_pins: i2c-1-pins {
+	i2c3_pins: i2c3-pins {
 		pins = "gpio42", "gpio43";
 		function = "blsp2_i2c";
 		drive-strength = <8>;
@@ -220,8 +220,8 @@
 	qcom,ath11k-calibration-variant = "Linksys-MR7350";
 };
 
-&i2c_1 {
-	pinctrl-0 = <&i2c_1_pins>;
+&blsp1_i2c3 {
+	pinctrl-0 = <&i2c3_pins>;
 	pinctrl-names = "default";
 	status = "okay";
 
