@@ -103,10 +103,12 @@
 	status = "okay";
 	pinctrl-0 = <&mdio_pins>;
 	pinctrl-names = "default";
+	reset-gpios = <&tlmm 77 GPIO_ACTIVE_LOW>;
+	reset-delay-us = <10000>;
+	reset-post-delay-us = <50000>;
 
 	rtl8211f_4: ethernet-phy@4 {
 		reg = <4>;
-		reset-gpios = <&tlmm 77 GPIO_ACTIVE_LOW>;
 	};
 };
 
