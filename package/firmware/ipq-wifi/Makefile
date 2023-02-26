@@ -23,37 +23,39 @@ endef
 # Please send a mail with your device-specific board files upstream.
 # You can find instructions and examples on the linux-wireless wiki:
 # <https://wireless.wiki.kernel.org/en/users/drivers/ath10k/boardfiles>
+#
+# Place files in this directory as board-<devicename>.<qca4019|qca9888|qca9889|qca9984|qca99x0|ipq8074>
+# Add boarda as "<package-name>,<board-name>" and replace each space with "::"
 
+comma:=,
 ALLWIFIBOARDS:= \
-	aruba_ap-365 \
-	buffalo_wxr-5950ax12 \
-	devolo_magic-2-wifi-next \
-	dynalink_dl-wrx36 \
-	edgecore_eap102 \
-	edgecore_ecw5410 \
-	edgecore_oap100 \
-	edimax_cax1800 \
-	extreme-networks_ws-ap3915i \
-	glinet_gl-a1300 \
-	glinet_gl-ap1300 \
-	glinet_gl-s1300 \
-	linksys_ea8300 \
-	linksys_whw03v2 \
-	p2w_r619ac \
-	pakedge_wr-1 \
-	qnap_301w \
-	qxwlan_e2600ac-c1 \
-	qxwlan_e2600ac-c2 \
-	redmi_ax6 \
-	sony_ncp-hg100-cellular \
-	teltonika_rutx \
-	xiaomi_ax3600 \
-	xiaomi_ax9000 \
-	zte_mf18a \
-	zte_mf289f \
-	zyxel_nbg7815
-
-ALLWIFIPACKAGES:=$(foreach BOARD,$(ALLWIFIBOARDS),ipq-wifi-$(BOARD))
+	aruba_ap-365,Aruba::AP-365 \
+	buffalo_wxr-5950ax12,Buffalo::WXR-5950AX12 \
+	devolo_magic-2-wifi-next,devolo::Magic::2::WiFi::next \
+	dynalink_dl-wrx36,Dynalink::DL-WRX36 \
+	edgecore_eap102,Edgecore::EAP102 \
+	edgecore_ecw5410,Edgecore::ECW5410 \
+	edgecore_oap100,Edgecore::OAP100 \
+	edimax_cax1800,Edimax::CAX1800 \
+	extreme-networks_ws-ap3915i,Edgecore::OAP100 \
+	glinet_gl-a1300,GL.iNet::GL-A1300 \
+	glinet_gl-ap1300,GL.iNet::GL-AP1300 \
+	glinet_gl-s1300,GL.iNet::GL-S1300 \
+	linksys_ea8300,Linksys::EA8300 \
+	linksys_whw03v2,Linksys::WHW03::V2 \
+	p2w_r619ac,P&W::R619AC \
+	pakedge_wr-1,Pakedge::WR-1 \
+	qnap_301w,QNAP::301w \
+	qxwlan_e2600ac-c1,Qxwlan::E2600AC::C1 \
+	qxwlan_e2600ac-c2,Qxwlan::E2600AC::C2 \
+	redmi_ax6,Redmi::AX6 \
+	sony_ncp-hg100-cellular,Sony::NCP-HG100/Cellular \
+	teltonika_rutx,Teltonika::RUTX \
+	xiaomi_ax3600,Xiaomi::AX3600 \
+	xiaomi_ax9000,Xiaomi::AX9000 \
+	zte_mf18a,ZTE::MF18A \
+	zte_mf289f,ZTE::MF289F \
+	zyxel_nbg7815,Zyxel::NBG7815 \
 
 define Package/ipq-wifi-default
   SUBMENU:=ath10k Board-Specific Overrides
@@ -121,36 +123,11 @@ Do not install it for any other device!
   PREV_BOARD+=ipq-wifi-$(1)
 endef
 
-# Add board name to ALLWIFIBOARDS
-# Place files in this directory as board-<devicename>.<qca4019|qca9888|qca9889|qca9984|qca99x0|ipq8074>
-# Add $(eval $(call generate-ipq-wifi-package,<devicename>,<display name>))
-
-$(eval $(call generate-ipq-wifi-package,aruba_ap-365,Aruba AP-365))
-$(eval $(call generate-ipq-wifi-package,buffalo_wxr-5950ax12,Buffalo WXR-5950AX12))
-$(eval $(call generate-ipq-wifi-package,devolo_magic-2-wifi-next,devolo Magic 2 WiFi next))
-$(eval $(call generate-ipq-wifi-package,dynalink_dl-wrx36,Dynalink DL-WRX36))
-$(eval $(call generate-ipq-wifi-package,edgecore_eap102,Edgecore EAP102))
-$(eval $(call generate-ipq-wifi-package,edgecore_ecw5410,Edgecore ECW5410))
-$(eval $(call generate-ipq-wifi-package,edgecore_oap100,Edgecore OAP100))
-$(eval $(call generate-ipq-wifi-package,edimax_cax1800,Edimax CAX1800))
-$(eval $(call generate-ipq-wifi-package,extreme-networks_ws-ap3915i,Edgecore OAP100))
-$(eval $(call generate-ipq-wifi-package,glinet_gl-a1300,GL.iNet GL-A1300))
-$(eval $(call generate-ipq-wifi-package,glinet_gl-ap1300,GL.iNet GL-AP1300))
-$(eval $(call generate-ipq-wifi-package,glinet_gl-s1300,GL.iNet GL-S1300))
-$(eval $(call generate-ipq-wifi-package,linksys_ea8300,Linksys EA8300))
-$(eval $(call generate-ipq-wifi-package,linksys_whw03v2,Linksys WHW03 V2))
-$(eval $(call generate-ipq-wifi-package,p2w_r619ac,P&W R619AC))
-$(eval $(call generate-ipq-wifi-package,pakedge_wr-1,Pakedge WR-1))
-$(eval $(call generate-ipq-wifi-package,qnap_301w,QNAP 301w))
-$(eval $(call generate-ipq-wifi-package,qxwlan_e2600ac-c1,Qxwlan E2600AC C1))
-$(eval $(call generate-ipq-wifi-package,qxwlan_e2600ac-c2,Qxwlan E2600AC C2))
-$(eval $(call generate-ipq-wifi-package,redmi_ax6,Redmi AX6))
-$(eval $(call generate-ipq-wifi-package,sony_ncp-hg100-cellular,Sony NCP-HG100/Cellular))
-$(eval $(call generate-ipq-wifi-package,teltonika_rutx,Teltonika RUTX))
-$(eval $(call generate-ipq-wifi-package,xiaomi_ax3600,Xiaomi AX3600))
-$(eval $(call generate-ipq-wifi-package,xiaomi_ax9000,Xiaomi AX9000))
-$(eval $(call generate-ipq-wifi-package,zte_mf18a,ZTE MF18A))
-$(eval $(call generate-ipq-wifi-package,zte_mf289f,ZTE MF289F))
-$(eval $(call generate-ipq-wifi-package,zyxel_nbg7815,Zyxel NBG7815))
-
-$(foreach PACKAGE,$(ALLWIFIPACKAGES),$(eval $(call BuildPackage,$(PACKAGE))))
+# Somebody who knows make, please make this more readable!!!
+$(foreach ID_NAME,$(ALLWIFIBOARDS), \
+	$(eval BOARD_ID := $(word 1,$(subst $(comma), ,$(ID_NAME)))) \
+	$(eval NAME_MANGLED := $(word 2,$(subst $(comma), ,$(ID_NAME)))) \
+	$(eval NAME := $(subst ::, ,$(NAME_MANGLED))) \
+	$(eval $(call generate-ipq-wifi-package,$(BOARD_ID),$(NAME))) \
+	$(eval $(call BuildPackage,ipq-wifi-$(BOARD_ID))) \
+)
