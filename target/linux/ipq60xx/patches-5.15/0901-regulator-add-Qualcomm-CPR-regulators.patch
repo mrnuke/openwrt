@@ -1,9 +1,10 @@
-From 15db7a6341e0d01c12cd9a76c1d9f51a6bca56cf Mon Sep 17 00:00:00 2001
+From 303fb163bb86f04432c93325ff8b9638c9e50641 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Mon, 11 Apr 2022 14:35:36 +0200
-Subject: [PATCH 137/137] regulator: add Qualcomm CPR regulators
+Subject: [PATCH] regulator: add Qualcomm CPR regulators
 
-Allow building Qualcomm CPR regulators.
+Add Qualcomm CPR driver, which allows using the CPR HW to calculate the
+correct OPP point voltage dynamically based on the system load.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 ---

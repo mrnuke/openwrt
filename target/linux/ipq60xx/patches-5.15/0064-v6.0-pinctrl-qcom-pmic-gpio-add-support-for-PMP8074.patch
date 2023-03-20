@@ -1,7 +1,7 @@
-From 55545dc54f015387dccfb3c8fe20115c5f21b8a7 Mon Sep 17 00:00:00 2001
+From 204cd3516f59eb7040b814429187e674f49ba065 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Mon, 11 Jul 2022 22:34:05 +0200
-Subject: [PATCH 35/44] pinctrl: qcom-pmic-gpio: add support for PMP8074
+Subject: [PATCH] pinctrl: qcom-pmic-gpio: add support for PMP8074
 
 PMP8074 has 12 GPIO-s with holes on GPIO1 and GPIO12.
 

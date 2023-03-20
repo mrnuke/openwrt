@@ -1,7 +1,7 @@
-From ffc91d0fc802e58f44c7f888f44643847b6dfa3a Mon Sep 17 00:00:00 2001
+From 0164d794cbc58488a7321272e95958d10cf103a4 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
-Date: Thu, 28 Apr 2022 20:26:13 +0200
-Subject: [PATCH 120/137] drivers: thermal: tsens: add IPQ8074 support
+Date: Fri, 19 Aug 2022 00:02:44 +0200
+Subject: [PATCH] thermal/drivers/tsens: Add IPQ8074 support
 
 Qualcomm IPQ8074 uses tsens v2.3 IP, however unlike other tsens v2 IP
 it only has one IRQ, that is used for up/low as well as critical.
@@ -9,6 +9,8 @@ It also does not support negative trip temperatures.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 Reviewed-by: Bjorn Andersson <bjorn.andersson@linaro.org>
+Link: https://lore.kernel.org/r/20220818220245.338396-4-robimarko@gmail.com
+Signed-off-by: Daniel Lezcano <daniel.lezcano@linaro.org>
 ---
  drivers/thermal/qcom/tsens-v2.c | 17 +++++++++++++++++
  drivers/thermal/qcom/tsens.c    |  3 +++

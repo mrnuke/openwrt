@@ -1,8 +1,7 @@
-From b4f85660d09360b2ef9f04e51890fbf9935bf759 Mon Sep 17 00:00:00 2001
+From 18921bfd81c88fb85a19683467f680897672f062 Mon Sep 17 00:00:00 2001
 From: Bjorn Andersson <bjorn.andersson@linaro.org>
 Date: Sun, 17 Oct 2021 09:12:18 -0700
-Subject: [PATCH 37/44] mfd: qcom-spmi-pmic: Add missing PMICs supported by
- socinfo
+Subject: [PATCH] mfd: qcom-spmi-pmic: Add missing PMICs supported by socinfo
 
 The Qualcomm socinfo driver has eight more PMICs described, add these to
 the SPMI PMIC driver as well.

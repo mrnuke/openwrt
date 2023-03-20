@@ -1,7 +1,7 @@
-From 2abf33c722b4ade9438dc91a652f294ada68a50e Mon Sep 17 00:00:00 2001
+From fb76b808f8628215afebaf0f8af0bde635302590 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
-Date: Wed, 18 May 2022 16:36:42 +0200
-Subject: [PATCH 123/137] arm64: dts: qcom: add PMP8074 DTSI
+Date: Fri, 19 Aug 2022 00:18:14 +0200
+Subject: [PATCH] arm64: dts: qcom: add PMP8074 DTSI
 
 PMP8074 is a companion PMIC to the Qualcomm IPQ8074 series that is
 controlled via SPMI.
@@ -12,17 +12,8 @@ RTC is disabled by default as there is no built-in battery so it will
 loose time unless board vendor added a battery, so make it optional.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
----
-Changes in v7:
-* Dual license with BSD-3-Clause
-* Use "-" instead of underscores in node names
-
-Changes in v6:
-* Add RTC and GPIO nodes
-
-Changes in v5:
-* Remove #address-cells and #size-cells as they are not required for
-regulator subnodes
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+Link: https://lore.kernel.org/r/20220818221815.346233-4-robimarko@gmail.com
 ---
  arch/arm64/boot/dts/qcom/pmp8074.dtsi | 125 ++++++++++++++++++++++++++
  1 file changed, 125 insertions(+)

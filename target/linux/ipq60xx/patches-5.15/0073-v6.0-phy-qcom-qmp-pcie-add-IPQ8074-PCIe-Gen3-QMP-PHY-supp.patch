@@ -1,8 +1,7 @@
-From 6702bed8d48e29bd51c4b702b0baf18c5b1814c1 Mon Sep 17 00:00:00 2001
+From 23bd21d8c05109b57aa9508e88fbdbc2b6d33de7 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Tue, 23 Aug 2022 22:47:40 +0200
-Subject: [PATCH 40/44] phy: qcom-qmp-pcie: add IPQ8074 PCIe Gen3 QMP PHY
- support
+Subject: [PATCH] phy: qcom-qmp-pcie: add IPQ8074 PCIe Gen3 QMP PHY support
 
 IPQ8074 has 2 different single lane PCIe PHY-s, one Gen2 and one Gen3.
 Gen2 one is already supported, so add the support for the Gen3 one.

@@ -1,8 +1,7 @@
-From f035a370b770831f1c4a5d5b5b4387391ee3f71a Mon Sep 17 00:00:00 2001
+From 7805365fee582056b32c69cf35aafbb94b14a8ca Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
-Date: Thu, 28 Apr 2022 19:06:29 +0200
-Subject: [PATCH 119/137] drivers: thermal: tsens: allow configuring min and
- max trips
+Date: Fri, 19 Aug 2022 00:02:43 +0200
+Subject: [PATCH] thermal/drivers/tsens: Allow configuring min and max trips
 
 IPQ8074 and IPQ6018 dont support negative trip temperatures and support
 up to 204 degrees C as the max trip temperature.
@@ -12,6 +11,8 @@ allow it to be configured as part of the features.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 Reviewed-by: Bjorn Andersson <bjorn.andersson@linaro.org>
+Link: https://lore.kernel.org/r/20220818220245.338396-3-robimarko@gmail.com
+Signed-off-by: Daniel Lezcano <daniel.lezcano@linaro.org>
 ---
  drivers/thermal/qcom/tsens-8960.c | 2 ++
  drivers/thermal/qcom/tsens-v0_1.c | 2 ++

@@ -1,8 +1,8 @@
-From 8878f39722eeacbb40babe82ad763d8d20214018 Mon Sep 17 00:00:00 2001
+From 7bd608426c407a79debea54b2b243950f330c5b8 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
-Date: Sat, 9 Jul 2022 00:32:04 +0200
-Subject: [PATCH 104/137] clk: qcom: apss-ipq-pll: use OF match data for Alpha
- PLL config
+Date: Fri, 19 Aug 2022 00:06:24 +0200
+Subject: [PATCH] clk: qcom: apss-ipq-pll: use OF match data for Alpha PLL
+ config
 
 Convert the driver to use OF match data for providing the Alpha PLL config
 per compatible.
@@ -13,6 +13,8 @@ While we are here rename "ipq_pll_config" to "ipq6018_pll_config" to make
 it clear that it is for IPQ6018 only.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+Link: https://lore.kernel.org/r/20220818220628.339366-5-robimarko@gmail.com
 ---
  drivers/clk/qcom/apss-ipq-pll.c | 12 +++++++++---
  1 file changed, 9 insertions(+), 3 deletions(-)

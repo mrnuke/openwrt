@@ -1,7 +1,7 @@
-From 5b717749ce49853f495ebac227c72013622b0810 Mon Sep 17 00:00:00 2001
+From 3a8f67b4770c817b04794c9a02e3f88f85d86280 Mon Sep 17 00:00:00 2001
 From: Gokul Sriram Palanisamy <gokulsri@codeaurora.org>
 Date: Sat, 30 Jan 2021 10:50:08 +0530
-Subject: [PATCH 116/137] remoteproc: qcom: Add ssr subdevice identifier
+Subject: [PATCH] remoteproc: qcom: Add ssr subdevice identifier
 
 Add name for ssr subdevice on IPQ8074 SoC.
 

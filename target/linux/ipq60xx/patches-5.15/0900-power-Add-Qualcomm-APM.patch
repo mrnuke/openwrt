@@ -1,9 +1,9 @@
-From 715f1016a6083b2a7509cb08a4f5ea0bc9661020 Mon Sep 17 00:00:00 2001
+From 6c98adf98236b8644b8f5e1aa7af9f1a88ea2766 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Mon, 11 Apr 2022 14:38:08 +0200
-Subject: [PATCH 136/137] power: Add Qualcomm APM
+Subject: [PATCH] power: Add Qualcomm APM
 
-Allow building Qualcomm APM.
+Add Qualcomm APM driver, which allows scaling cache and memory fabrics.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 ---

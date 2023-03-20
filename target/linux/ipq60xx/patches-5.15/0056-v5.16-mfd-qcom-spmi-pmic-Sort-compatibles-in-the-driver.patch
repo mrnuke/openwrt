@@ -1,7 +1,7 @@
-From f76d65737cff6f41f0fab7a46a742d89c08fd652 Mon Sep 17 00:00:00 2001
+From 60df90d6829d16338e2971420220395cfc289247 Mon Sep 17 00:00:00 2001
 From: Bjorn Andersson <bjorn.andersson@linaro.org>
 Date: Sun, 17 Oct 2021 09:12:16 -0700
-Subject: [PATCH 36/44] mfd: qcom-spmi-pmic: Sort compatibles in the driver
+Subject: [PATCH] mfd: qcom-spmi-pmic: Sort compatibles in the driver
 
 Sort the compatibles in the driver, to make it easier to validate that
 the DT binding and driver are in sync.

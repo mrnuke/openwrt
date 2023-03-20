@@ -1,13 +1,14 @@
-From 66dafdaad281e0a0eb2045ffb1f8dcf72e25989f Mon Sep 17 00:00:00 2001
+From 8df9fefd1d04f6f97f6015d7347104f69e6ea580 Mon Sep 17 00:00:00 2001
 From: Baruch Siach <baruch.siach@siklu.com>
-Date: Mon, 7 Feb 2022 16:51:24 +0200
-Subject: [PATCH 42/44] PCI: dwc: tegra: move GEN3_RELATED DBI register to
- common header
+Date: Tue, 21 Jun 2022 11:54:52 +0300
+Subject: [PATCH] PCI: dwc: Move GEN3_RELATED DBI definitions to common header
 
 These are common dwc macros that will be used for other platforms.
 
-Reviewed-by: Rob Herring <robh@kernel.org>
+Link: https://lore.kernel.org/r/1c2d5a7a139be81fa15f356b2380163dbdebdc09.1655799816.git.baruch@tkos.co.il
 Signed-off-by: Baruch Siach <baruch.siach@siklu.com>
+Signed-off-by: Bjorn Helgaas <bhelgaas@google.com>
+Reviewed-by: Rob Herring <robh@kernel.org>
 ---
  drivers/pci/controller/dwc/pcie-designware.h | 6 ++++++
  drivers/pci/controller/dwc/pcie-tegra194.c   | 6 ------

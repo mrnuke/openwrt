@@ -1,7 +1,7 @@
-From 2ba036ce8e99673073adc5ac62e7768a47725567 Mon Sep 17 00:00:00 2001
+From 14789f38e03c42857613b69ff0f032e03653b246 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Mon, 4 Jul 2022 23:23:55 +0200
-Subject: [PATCH 33/44] regulator: qcom_spmi: add support for HT_P600
+Subject: [PATCH] regulator: qcom_spmi: add support for HT_P600
 
 HT_P600 is a LDO PMOS regulator based on LV P600 using HFS430 layout
 found in PMP8074 and PMS405 PMIC-s.

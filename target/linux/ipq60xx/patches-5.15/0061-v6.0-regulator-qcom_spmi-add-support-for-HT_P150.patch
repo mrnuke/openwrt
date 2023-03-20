@@ -1,7 +1,7 @@
-From 8928dcb644461e72608dbea26af4d072868ae41b Mon Sep 17 00:00:00 2001
+From dedc087d43013ab6043dd1da4cd585dd4242a6bb Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Mon, 4 Jul 2022 23:23:54 +0200
-Subject: [PATCH 32/44] regulator: qcom_spmi: add support for HT_P150
+Subject: [PATCH] regulator: qcom_spmi: add support for HT_P150
 
 HT_P150 is a LDO PMOS regulator based on LV P150 using HFS430 layout
 found in PMP8074 and PMS405 PMIC-s.

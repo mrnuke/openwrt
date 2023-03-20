@@ -1,7 +1,7 @@
-From d2b31da4eae2175ff86f28f596b54abde08d382f Mon Sep 17 00:00:00 2001
+From 6b9d5ecd2913758780a0529f9b95392f330b721b Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
-Date: Sat, 9 Jul 2022 00:18:45 +0200
-Subject: [PATCH 102/137] clk: qcom: apss-ipq6018: fix apcs_alias0_clk_src
+Date: Fri, 19 Aug 2022 00:06:21 +0200
+Subject: [PATCH] clk: qcom: apss-ipq6018: fix apcs_alias0_clk_src
 
 While working on IPQ8074 APSS driver it was discovered that IPQ6018 and
 IPQ8074 use almost the same PLL and APSS clocks, however APSS driver is
@@ -22,6 +22,8 @@ Tested on IPQ6018-CP01-C1 reference board and multiple IPQ8074 boards.
 Fixes: 5e77b4ef1b19 ("clk: qcom: Add ipq6018 apss clock controller")
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+Link: https://lore.kernel.org/r/20220818220628.339366-2-robimarko@gmail.com
 ---
  drivers/clk/qcom/apss-ipq6018.c | 13 ++++++-------
  1 file changed, 6 insertions(+), 7 deletions(-)

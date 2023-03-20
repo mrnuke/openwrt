@@ -1,19 +1,15 @@
-From 24a47e4619d90266188d26be04c0c29854294f06 Mon Sep 17 00:00:00 2001
+From e593e834fe8ba9bf314d8215ac05d8787f81efda Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
-Date: Thu, 28 Apr 2022 14:58:16 +0200
-Subject: [PATCH 118/137] drivers: thermal: tsens: Add support for combined
- interrupt
+Date: Fri, 19 Aug 2022 00:02:42 +0200
+Subject: [PATCH] thermal/drivers/tsens: Add support for combined interrupt
 
 Despite using tsens v2.3 IP, IPQ8074 and IPQ6018 only have one IRQ for
 signaling both up/low and critical trips.
 
 Signed-off-by: Robert Marko <robimarko@gmail.com>
----
-Changes in v7:
-* Rebase to apply on next-20220818
-
-Changes in v6:
-* Check critical IRQ handler return, simplify up/low return
+Reviewed-by: Bjorn Andersson <andersson@kernel.org>
+Link: https://lore.kernel.org/r/20220818220245.338396-2-robimarko@gmail.com
+Signed-off-by: Daniel Lezcano <daniel.lezcano@linaro.org>
 ---
  drivers/thermal/qcom/tsens-8960.c |  1 +
  drivers/thermal/qcom/tsens-v0_1.c |  1 +
@@ -80,7 +76,7 @@ index 99a8d9f3e03c..11172afbc5da 100644
  }
  
 +/**
-+ * tsens_combined_irq_thread - Threaded interrupt handler for combined interrupts
++ * tsens_combined_irq_thread() - Threaded interrupt handler for combined interrupts
 + * @irq: irq number
 + * @data: tsens controller private data
 + *

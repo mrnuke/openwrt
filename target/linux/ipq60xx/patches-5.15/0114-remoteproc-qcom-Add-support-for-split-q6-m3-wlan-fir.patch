@@ -1,8 +1,7 @@
-From bcb2c37f265924ac43642f1f97c964dd546b3cb5 Mon Sep 17 00:00:00 2001
+From b422c9d4f048b086ce83f44a7cfcddcce162897f Mon Sep 17 00:00:00 2001
 From: Gokul Sriram Palanisamy <gokulsri@codeaurora.org>
 Date: Sat, 30 Jan 2021 10:50:07 +0530
-Subject: [PATCH 115/137] remoteproc: qcom: Add support for split q6 + m3 wlan
- firmware
+Subject: [PATCH] remoteproc: qcom: Add support for split q6 + m3 wlan firmware
 
 IPQ8074 supports split firmware for q6 and m3 as well.
 So add support for loading the m3 firmware before q6.

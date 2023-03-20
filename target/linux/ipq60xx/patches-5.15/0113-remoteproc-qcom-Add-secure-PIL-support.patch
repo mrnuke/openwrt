@@ -1,7 +1,7 @@
-From cb3b9e284104fd7fe4aa92a37df005577aed2c40 Mon Sep 17 00:00:00 2001
+From 7358d42dfbdfdb5d4f1d0d4c2e5c2bb4143a29b0 Mon Sep 17 00:00:00 2001
 From: Gokul Sriram Palanisamy <gokulsri@codeaurora.org>
 Date: Sat, 30 Jan 2021 10:50:06 +0530
-Subject: [PATCH 114/137] remoteproc: qcom: Add secure PIL support
+Subject: [PATCH] remoteproc: qcom: Add secure PIL support
 
 IPQ8074 uses secure PIL. Hence, adding the support for the same.
 

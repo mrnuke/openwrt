@@ -1,12 +1,13 @@
-From d9965ec6f02f71609d837d33d4bae20fb7dec1fd Mon Sep 17 00:00:00 2001
+From 406a332fd1bcc4e18d73cce390f56272fe9111d7 Mon Sep 17 00:00:00 2001
 From: Sivaprakash Murugesan <sivaprak@codeaurora.org>
 Date: Fri, 17 Apr 2020 16:37:10 +0530
-Subject: [PATCH 130/137] remoteproc: wcss: disable auto boot for IPQ8074
+Subject: [PATCH] remoteproc: wcss: disable auto boot for IPQ8074
 
-auto boot is disabled for IPQ8074 the wifi driver brings up the wcss.
+There is no need for remoteproc to boot automatically, ath11k will trigger
+booting when its probing.
 
 Signed-off-by: Sivaprakash Murugesan <sivaprak@codeaurora.org>
-Change-Id: Ia82edb7ee52f2bd010c099f151179d69a953ac88
+Signed-off-by: Robert Marko <robimarko@gmail.com>
 ---
  drivers/remoteproc/qcom_q6v5_wcss.c | 4 ++++
  1 file changed, 4 insertions(+)

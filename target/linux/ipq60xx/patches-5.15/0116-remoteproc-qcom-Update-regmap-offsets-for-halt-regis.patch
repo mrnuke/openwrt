@@ -1,8 +1,7 @@
-From 3bc5b97ecbb003e413ae76b332b0ccdba05ef6bc Mon Sep 17 00:00:00 2001
+From 8c73af6e8d78c66cfef0f551b00d375ec0b67ff3 Mon Sep 17 00:00:00 2001
 From: Gokul Sriram Palanisamy <gokulsri@codeaurora.org>
 Date: Sat, 30 Jan 2021 10:50:09 +0530
-Subject: [PATCH 117/137] remoteproc: qcom: Update regmap offsets for halt
- register
+Subject: [PATCH] remoteproc: qcom: Update regmap offsets for halt register
 
 Fixed issue in reading halt-regs parameter from device-tree.
 

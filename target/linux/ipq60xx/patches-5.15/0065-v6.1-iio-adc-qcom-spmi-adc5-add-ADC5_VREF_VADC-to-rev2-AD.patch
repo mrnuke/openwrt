@@ -1,8 +1,7 @@
-From 1aa9a70ca9a1d3bb5139030fd9fc340d8525a7d7 Mon Sep 17 00:00:00 2001
+From 41a02abb863edca0de0373bc3deaf0639b18c589 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Fri, 19 Aug 2022 00:18:13 +0200
-Subject: [PATCH 38/44] iio: adc: qcom-spmi-adc5: add ADC5_VREF_VADC to rev2
- ADC5
+Subject: [PATCH] iio: adc: qcom-spmi-adc5: add ADC5_VREF_VADC to rev2 ADC5
 
 Add support for ADC5_VREF_VADC channel to rev2 ADC5 channel list.
 This channel measures the VADC reference LDO output.

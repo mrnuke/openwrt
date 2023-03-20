@@ -1,7 +1,7 @@
-From 84e13a5267e43bb0a6a1f764211fda7769dc9cbe Mon Sep 17 00:00:00 2001
+From 125681433c8e526356947acf572fe8ca8ad32291 Mon Sep 17 00:00:00 2001
 From: Gokul Sriram Palanisamy <gokulsri@codeaurora.org>
 Date: Sat, 30 Jan 2021 10:50:05 +0530
-Subject: [PATCH 113/137] remoteproc: qcom: Add PRNG proxy clock
+Subject: [PATCH] remoteproc: qcom: Add PRNG proxy clock
 
 PRNG clock is needed by the secure PIL, support for the same
 is added in subsequent patches.

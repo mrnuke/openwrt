@@ -1,7 +1,7 @@
-From 9d38e110e23ce0b858ccd67a8a819dc187529a33 Mon Sep 17 00:00:00 2001
+From f7fb35d540240889a8f45f3fd42363cbc1a448e2 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
-Date: Fri, 8 Jul 2022 23:24:25 +0200
-Subject: [PATCH 101/137] clk: qcom: clk-rcg2: add rcg2 mux ops
+Date: Fri, 19 Aug 2022 00:06:20 +0200
+Subject: [PATCH] clk: qcom: clk-rcg2: add rcg2 mux ops
 
 An RCG may act as a mux that switch between 2 parents.
 This is the case on IPQ6018 and IPQ8074 where the APCS core clk that feeds
@@ -16,6 +16,8 @@ RCG2 as a mux.
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 Signed-off-by: Robert Marko <robimarko@gmail.com>
 Reviewed-by: Dmitry Baryshkov <dmitry.baryshkov@linaro.org>
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
+Link: https://lore.kernel.org/r/20220818220628.339366-1-robimarko@gmail.com
 ---
  drivers/clk/qcom/clk-rcg.h  | 1 +
  drivers/clk/qcom/clk-rcg2.c | 7 +++++++

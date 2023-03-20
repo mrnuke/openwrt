@@ -1,7 +1,7 @@
-From 8454872e52992108308e44aa974b441558fa1fc9 Mon Sep 17 00:00:00 2001
+From 2b0fe9137aa32d7fc367bf3a1cef4fa97ece6d58 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Tue, 23 Aug 2022 22:43:51 +0200
-Subject: [PATCH 39/44] phy: qcom-qmp-pcie: make pipe clock rate configurable
+Subject: [PATCH] phy: qcom-qmp-pcie: make pipe clock rate configurable
 
 IPQ8074 Gen3 PCIe PHY uses 250MHz as the pipe clock rate instead of 125MHz
 like every other PCIe QMP PHY does, so make it configurable as part of the

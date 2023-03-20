@@ -1,8 +1,7 @@
-From 933b687758646242fc7410edb06da70fe7540cdc Mon Sep 17 00:00:00 2001
+From 3e3da8da25f81fa3f0f3a37f60d10b17d1166864 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Mon, 4 Jul 2022 23:23:57 +0200
-Subject: [PATCH 34/44] regulator: qcom_spmi: add support for PMP8074
- regulators
+Subject: [PATCH] regulator: qcom_spmi: add support for PMP8074 regulators
 
 PMP8074 is a companion PMIC for the Qualcomm IPQ8074 WiSoC-s.
 

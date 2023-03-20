@@ -1,7 +1,7 @@
-From 70835efbc6c9dbc4e652aa60a250ecb1a2160a9b Mon Sep 17 00:00:00 2001
+From a212eb94fc9f72a126df651c5d7898feaea29526 Mon Sep 17 00:00:00 2001
 From: Robert Marko <robimarko@gmail.com>
 Date: Sun, 5 Sep 2021 19:11:31 +0200
-Subject: [PATCH 41/44] soc: qcom: socinfo: Add IPQ8074 family ID-s
+Subject: [PATCH] soc: qcom: socinfo: Add IPQ8074 family ID-s
 
 IPQ8074 family SoC ID-s are missing, so lets add them based on
 the downstream driver.
