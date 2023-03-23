@@ -52,6 +52,7 @@ Link: https://lore.kernel.org/r/20221107132901.489240-1-robimarko@gmail.com
 @@ -12,6 +12,7 @@ struct qcom_reset_map {
  	unsigned int reg;
  	u8 bit;
+ 	u8 udelay;
 +	u32 bitmask;
  };
  
