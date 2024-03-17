@@ -15,6 +15,9 @@ ipq60xx_setup_interfaces()
 	8devices,mango-dvk)
 		ucidef_set_interfaces_lan_wan "lan1 lan2" "wan"
 		;;
+	linksys,mr7350)
+		ucidef_set_interfaces_lan_wan "eth0 eth1 eth2 eth3" "eth4"
+		;;
 	netgear,wax214)
 		ucidef_set_interfaces_lan_wan "lan"
 		;;

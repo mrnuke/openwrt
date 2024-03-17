@@ -1,0 +1,28 @@
+/ {
+	reserved-memory {
+		#address-cells = <2>;
+		#size-cells = <2>;
+		ranges;
+
+		nss@40000000 {
+			reg = <0x00 0x40000000 0x00 0x1000000>;
+			no-map;
+		};
+	};
+};
+
+&soc {
+	blsp1_i2c6: i2c@78ba000 {
+		compatible = "qcom,i2c-qup-v2.2.1";
+		#address-cells = <1>;
+		#size-cells = <0>;
+		reg = <0x0 0x078ba000 0x0 0x600>;
+		interrupts = <GIC_SPI 300 IRQ_TYPE_LEVEL_HIGH>;
+		clocks = <&gcc GCC_BLSP1_QUP6_I2C_APPS_CLK>,
+			 <&gcc GCC_BLSP1_AHB_CLK>;
+		clock-names = "core", "iface";
+		clock-frequency = <400000>;
+		dmas = <&blsp_dma 22>, <&blsp_dma 23>;
+		dma-names = "tx", "rx";
+	};
+};

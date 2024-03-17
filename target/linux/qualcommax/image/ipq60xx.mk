@@ -11,6 +11,19 @@ define Device/8devices_mango-dvk
 endef
 TARGET_DEVICES += 8devices_mango-dvk
 
+define Device/linksys_mr7350
+	$(call Device/FitImage)
+	$(call Device/UbiFit)
+	DEVICE_VENDOR := Linksys
+	DEVICE_MODEL := MR7350
+	BLOCKSIZE := 128k
+	PAGESIZE := 2048
+	SOC := ipq6018
+	DEVICE_PACKAGES := ipq-wifi-linksys_mr7350 kmod-leds-pca963x \
+		kmod-usb3 kmod-usb-dwc3 kmod-usb-dwc3-qcom
+endef
+TARGET_DEVICES += linksys_mr7350
+
 define Device/netgear_wax214
        $(call Device/FitImage)
        $(call Device/UbiFit)
