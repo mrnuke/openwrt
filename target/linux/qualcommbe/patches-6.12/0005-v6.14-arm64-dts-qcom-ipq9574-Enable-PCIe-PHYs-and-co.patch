@@ -1,7 +1,7 @@
-From 438d05fb9be6bcd565e713c7e8d9ffb97e5f8d1e Mon Sep 17 00:00:00 2001
+From 695cb0b8f9c525fe6d3ffbc349bc6087acd71201 Mon Sep 17 00:00:00 2001
 From: devi priya <quic_devipriy@quicinc.com>
 Date: Thu, 1 Aug 2024 11:18:02 +0530
-Subject: [PATCH 2/2] arm64: dts: qcom: ipq9574: Enable PCIe PHYs and
+Subject: [PATCH 05/22] v6.14: arm64: dts: qcom: ipq9574: Enable PCIe PHYs and
  controllers
 
 Enable the PCIe controller and PHY nodes corresponding to RDP 433.

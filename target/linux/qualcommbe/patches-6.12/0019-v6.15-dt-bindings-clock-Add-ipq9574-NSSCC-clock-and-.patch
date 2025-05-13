@@ -1,26 +1,28 @@
-From 3d98604921d4b7216d3d0c8a76160dce083bd040 Mon Sep 17 00:00:00 2001
+From 5ed04d121a8d24cc3151aa57a21a6c944ad6d7f3 Mon Sep 17 00:00:00 2001
 From: Devi Priya <quic_devipriy@quicinc.com>
-Date: Fri, 25 Oct 2024 09:25:17 +0530
-Subject: [PATCH 4/7] dt-bindings: clock: Add ipq9574 NSSCC clock and reset
- definitions
+Date: Thu, 13 Mar 2025 16:33:56 +0530
+Subject: [PATCH 19/22] v6.15: dt-bindings: clock: Add ipq9574 NSSCC clock and
+ reset definitions
 
 Add NSSCC clock and reset definitions for ipq9574.
 
+Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 Signed-off-by: Devi Priya <quic_devipriy@quicinc.com>
 Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
-Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
+Link: https://lore.kernel.org/r/20250313110359.242491-4-quic_mmanikan@quicinc.com
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
 ---
- .../bindings/clock/qcom,ipq9574-nsscc.yaml    |  73 +++++++++
+ .../bindings/clock/qcom,ipq9574-nsscc.yaml    |  98 +++++++++++
  .../dt-bindings/clock/qcom,ipq9574-nsscc.h    | 152 ++++++++++++++++++
  .../dt-bindings/reset/qcom,ipq9574-nsscc.h    | 134 +++++++++++++++
- 3 files changed, 359 insertions(+)
+ 3 files changed, 384 insertions(+)
  create mode 100644 Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
  create mode 100644 include/dt-bindings/clock/qcom,ipq9574-nsscc.h
  create mode 100644 include/dt-bindings/reset/qcom,ipq9574-nsscc.h
 
 --- /dev/null
 +++ b/Documentation/devicetree/bindings/clock/qcom,ipq9574-nsscc.yaml
-@@ -0,0 +1,73 @@
+@@ -0,0 +1,98 @@
 +# SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause)
 +%YAML 1.2
 +---
@@ -35,7 +37,7 @@ Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 +
 +description: |
 +  Qualcomm networking sub system clock control module provides the clocks,
-+  resets and power domains on IPQ9574
++  resets on IPQ9574
 +
 +  See also::
 +    include/dt-bindings/clock/qcom,ipq9574-nsscc.h
@@ -62,9 +64,24 @@ Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 +  '#interconnect-cells':
 +    const: 1
 +
++  clock-names:
++    items:
++      - const: xo
++      - const: nss_1200
++      - const: ppe_353
++      - const: gpll0_out
++      - const: uniphy0_rx
++      - const: uniphy0_tx
++      - const: uniphy1_rx
++      - const: uniphy1_tx
++      - const: uniphy2_rx
++      - const: uniphy2_tx
++      - const: bus
++
 +required:
 +  - compatible
 +  - clocks
++  - clock-names
 +
 +allOf:
 +  - $ref: qcom,gcc.yaml#
@@ -89,9 +106,19 @@ Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 +               <&uniphy 4>,
 +               <&uniphy 5>,
 +               <&gcc GCC_NSSCC_CLK>;
++      clock-names = "xo",
++                    "nss_1200",
++                    "ppe_353",
++                    "gpll0_out",
++                    "uniphy0_rx",
++                    "uniphy0_tx",
++                    "uniphy1_rx",
++                    "uniphy1_tx",
++                    "uniphy2_rx",
++                    "uniphy2_tx",
++                    "bus";
 +      #clock-cells = <1>;
 +      #reset-cells = <1>;
-+      #power-domain-cells = <1>;
 +    };
 +...
 --- /dev/null
@@ -99,7 +126,7 @@ Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 @@ -0,0 +1,152 @@
 +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 +/*
-+ * Copyright (c) 2023, The Linux Foundation. All rights reserved.
++ * Copyright (c) 2023, 2025 The Linux Foundation. All rights reserved.
 + */
 +
 +#ifndef _DT_BINDINGS_CLOCK_IPQ_NSSCC_9574_H
@@ -254,7 +281,7 @@ Reviewed-by: Krzysztof Kozlowski <krzysztof.kozlowski@linaro.org>
 @@ -0,0 +1,134 @@
 +/* SPDX-License-Identifier: (GPL-2.0-only OR BSD-2-Clause) */
 +/*
-+ * Copyright (c) 2023, The Linux Foundation. All rights reserved.
++ * Copyright (c) 2023, 2025 The Linux Foundation. All rights reserved.
 + */
 +
 +#ifndef _DT_BINDINGS_RESET_IPQ_NSSCC_9574_H

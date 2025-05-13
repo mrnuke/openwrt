@@ -1,7 +1,7 @@
-From 758aa2d7e3c0acfe9c952a1cbe6416ec6130c2a1 Mon Sep 17 00:00:00 2001
+From 20a3597d994c8ac372bbb66d9f11bccb7f405154 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Fri, 3 Jan 2025 15:31:37 +0800
-Subject: [PATCH 2/3] arm64: dts: qcom: ipq9574: Add CMN PLL node
+Subject: [PATCH 08/22] v6.14: arm64: dts: qcom: ipq9574: Add CMN PLL node
 
 The CMN PLL clock controller allows selection of an input clock rate
 from a defined set of input clock rates. It in-turn supplies fixed
@@ -39,7 +39,7 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
   */
  
  /dts-v1/;
-@@ -120,6 +120,21 @@
+@@ -164,6 +164,21 @@
  	status = "okay";
  };
  
@@ -101,7 +101,7 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
  	};
  
  	cpus {
-@@ -243,6 +255,18 @@
+@@ -335,6 +347,18 @@
  			status = "disabled";
  		};
  

@@ -1,25 +1,27 @@
-From 86db870d9e00b71fb3bd2c8a1a72cda971d9a77d Mon Sep 17 00:00:00 2001
+From 8b42bea7cf2a21e854becf29760a947bef5cde0b Mon Sep 17 00:00:00 2001
 From: Devi Priya <quic_devipriy@quicinc.com>
-Date: Fri, 25 Oct 2024 09:25:18 +0530
-Subject: [PATCH 5/7] clk: qcom: Add NSS clock Controller driver for IPQ9574
+Date: Thu, 13 Mar 2025 16:33:57 +0530
+Subject: [PATCH 21/22] v6.15: clk: qcom: Add NSS clock Controller driver for
+ IPQ9574
 
-Add Networking Sub System Clock Controller(NSSCC) driver for ipq9574 based
+Add Networking Sub System Clock Controller (NSSCC) driver for ipq9574 based
 devices.
 
-Reported-by: kernel test robot <lkp@intel.com>
-Closes: https://lore.kernel.org/oe-kbuild-all/202410101431.tjpSRNTY-lkp@intel.com/
+Reviewed-by: Konrad Dybcio <konrad.dybcio@oss.qualcomm.com>
 Signed-off-by: Devi Priya <quic_devipriy@quicinc.com>
 Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
+Link: https://lore.kernel.org/r/20250313110359.242491-5-quic_mmanikan@quicinc.com
+Signed-off-by: Bjorn Andersson <andersson@kernel.org>
 ---
  drivers/clk/qcom/Kconfig         |    7 +
  drivers/clk/qcom/Makefile        |    1 +
- drivers/clk/qcom/nsscc-ipq9574.c | 3080 ++++++++++++++++++++++++++++++
- 3 files changed, 3088 insertions(+)
+ drivers/clk/qcom/nsscc-ipq9574.c | 3110 ++++++++++++++++++++++++++++++
+ 3 files changed, 3118 insertions(+)
  create mode 100644 drivers/clk/qcom/nsscc-ipq9574.c
 
 --- a/drivers/clk/qcom/Kconfig
 +++ b/drivers/clk/qcom/Kconfig
-@@ -215,6 +215,13 @@ config IPQ_GCC_9574
+@@ -264,6 +264,13 @@ config IPQ_GCC_9574
  	  i2c, USB, SD/eMMC, etc. Select this for the root clock
  	  of ipq9574.
  
@@ -32,10 +34,10 @@ Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
 +
  config IPQ_NSSCC_QCA8K
  	tristate "QCA8K(QCA8386 or QCA8084) NSS Clock Controller"
- 	depends on MDIO_BUS || COMPILE_TEST
+ 	depends on MDIO_BUS
 --- a/drivers/clk/qcom/Makefile
 +++ b/drivers/clk/qcom/Makefile
-@@ -31,6 +31,7 @@ obj-$(CONFIG_IPQ_GCC_6018) += gcc-ipq601
+@@ -37,6 +37,7 @@ obj-$(CONFIG_IPQ_GCC_6018) += gcc-ipq601
  obj-$(CONFIG_IPQ_GCC_806X) += gcc-ipq806x.o
  obj-$(CONFIG_IPQ_GCC_8074) += gcc-ipq8074.o
  obj-$(CONFIG_IPQ_GCC_9574) += gcc-ipq9574.o
@@ -45,11 +47,11 @@ Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
  obj-$(CONFIG_MDM_GCC_9607) += gcc-mdm9607.o
 --- /dev/null
 +++ b/drivers/clk/qcom/nsscc-ipq9574.c
-@@ -0,0 +1,3080 @@
+@@ -0,0 +1,3110 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
 + * Copyright (c) 2021, The Linux Foundation. All rights reserved.
-+ * Copyright (c) 2023 Qualcomm Innovation Center, Inc. All rights reserved.
++ * Copyright (c) 2023, 2025 Qualcomm Innovation Center, Inc. All rights reserved.
 + */
 +
 +#include <linux/clk.h>
@@ -60,8 +62,10 @@ Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
 +#include <linux/module.h>
 +#include <linux/of.h>
 +#include <linux/of_device.h>
-+#include <linux/regmap.h>
 +#include <linux/platform_device.h>
++#include <linux/pm_clock.h>
++#include <linux/pm_runtime.h>
++#include <linux/regmap.h>
 +
 +#include <dt-bindings/clock/qcom,ipq9574-nsscc.h>
 +#include <dt-bindings/interconnect/qcom,ipq9574.h>
@@ -3094,6 +3098,10 @@ Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
 +	.icc_first_node_id = IPQ_NSSCC_ID,
 +};
 +
++static const struct dev_pm_ops nss_cc_ipq9574_pm_ops = {
++	SET_RUNTIME_PM_OPS(pm_clk_suspend, pm_clk_resume, NULL)
++};
++
 +static const struct of_device_id nss_cc_ipq9574_match_table[] = {
 +	{ .compatible = "qcom,ipq9574-nsscc" },
 +	{ }
@@ -3103,14 +3111,37 @@ Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
 +static int nss_cc_ipq9574_probe(struct platform_device *pdev)
 +{
 +	struct regmap *regmap;
++	int ret;
++
++	ret = devm_pm_runtime_enable(&pdev->dev);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Fail to enable runtime PM\n");
++
++	ret = devm_pm_clk_create(&pdev->dev);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Fail to create PM clock\n");
++
++	ret = pm_clk_add(&pdev->dev, "bus");
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Fail to add bus clock\n");
++
++	ret = pm_runtime_resume_and_get(&pdev->dev);
++	if (ret)
++		return dev_err_probe(&pdev->dev, ret, "Fail to resume\n");
 +
 +	regmap = qcom_cc_map(pdev, &nss_cc_ipq9574_desc);
-+	if (IS_ERR(regmap))
-+		return PTR_ERR(regmap);
++	if (IS_ERR(regmap)) {
++		pm_runtime_put(&pdev->dev);
++		return dev_err_probe(&pdev->dev, PTR_ERR(regmap),
++				     "Fail to map clock controller registers\n");
++	}
 +
 +	clk_alpha_pll_configure(&ubi32_pll_main, regmap, &ubi32_pll_config);
 +
-+	return qcom_cc_really_probe(&pdev->dev, &nss_cc_ipq9574_desc, regmap);
++	ret = qcom_cc_really_probe(&pdev->dev, &nss_cc_ipq9574_desc, regmap);
++	pm_runtime_put(&pdev->dev);
++
++	return ret;
 +}
 +
 +static struct platform_driver nss_cc_ipq9574_driver = {
@@ -3118,11 +3149,12 @@ Signed-off-by: Manikanta Mylavarapu <quic_mmanikan@quicinc.com>
 +	.driver = {
 +		.name = "qcom,nsscc-ipq9574",
 +		.of_match_table = nss_cc_ipq9574_match_table,
++		.pm = &nss_cc_ipq9574_pm_ops,
 +		.sync_state = icc_sync_state,
 +	},
 +};
 +
 +module_platform_driver(nss_cc_ipq9574_driver);
 +
-+MODULE_DESCRIPTION("QTI NSS_CC IPQ9574 Driver");
++MODULE_DESCRIPTION("Qualcomm Technologies, Inc. NSSCC IPQ9574 Driver");
 +MODULE_LICENSE("GPL");

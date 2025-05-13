@@ -1,8 +1,8 @@
-From d80c7fbfa908e3d893a1ea7fe178dfa82ed66bf1 Mon Sep 17 00:00:00 2001
+From acb06ebe2d1f043fd597f5c33aff048ae1804293 Mon Sep 17 00:00:00 2001
 From: devi priya <quic_devipriy@quicinc.com>
 Date: Thu, 1 Aug 2024 11:18:01 +0530
-Subject: [PATCH 1/2] arm64: dts: qcom: ipq9574: Add PCIe PHYs and controller
- nodes
+Subject: [PATCH 04/22] v6.14: arm64: dts: qcom: ipq9574: Add PCIe PHYs and
+ controller nodes
 
 Add PCIe0, PCIe1, PCIe2, PCIe3 (and corresponding PHY) devices
 found on IPQ9574 platform. The PCIe0 & PCIe1 are 1-lane Gen3
@@ -18,7 +18,7 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-@@ -239,6 +239,52 @@
+@@ -226,6 +226,52 @@
  			reg = <0x00060000 0x6000>;
  		};
  
@@ -71,8 +71,8 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
  		rng: rng@e3000 {
  			compatible = "qcom,prng-ee";
  			reg = <0x000e3000 0x1000>;
-@@ -268,6 +314,52 @@
- 			assigned-clock-rates-u64 = /bits/ 64 <12000000000>;
+@@ -243,6 +289,52 @@
+ 			status = "disabled";
  		};
  
 +		pcie3_phy: phy@f4000 {
@@ -124,7 +124,7 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
  		qfprom: efuse@a4000 {
  			compatible = "qcom,ipq9574-qfprom", "qcom,qfprom";
  			reg = <0x000a4000 0x5a1>;
-@@ -334,10 +426,10 @@
+@@ -309,10 +401,10 @@
  			clocks = <&xo_board_clk>,
  				 <&sleep_clk>,
  				 <0>,
@@ -139,7 +139,7 @@ Signed-off-by: Bjorn Andersson <andersson@kernel.org>
  				 <0>;
  			#clock-cells = <1>;
  			#reset-cells = <1>;
-@@ -777,6 +869,326 @@
+@@ -756,6 +848,326 @@
  				status = "disabled";
  			};
  		};
