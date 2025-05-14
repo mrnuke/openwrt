@@ -1,7 +1,7 @@
-From 3e98aaf9e5c6b2206edce3309beb1adeb2b61b60 Mon Sep 17 00:00:00 2001
+From b3957ed34c62c40e662e93726146ca16f599bd03 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Thu, 23 Nov 2023 15:41:20 +0800
-Subject: [PATCH 15/17] arm64: dts: qcom: Add IPQ9574 MDIO device node
+Subject: [PATCH 301/360] arm64: dts: qcom: Add IPQ9574 MDIO device node
 
 The MDIO bus master block is used to accessing the MDIO slave
 device (such as PHY device), the dedicated MDIO PINs needs to
@@ -15,7 +15,7 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-@@ -297,6 +297,8 @@
+@@ -295,6 +295,8 @@
  		mdio: mdio@90000 {
  			compatible =  "qcom,ipq9574-mdio", "qcom,ipq4019-mdio";
  			reg = <0x00090000 0x64>;
@@ -24,7 +24,7 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
  			#address-cells = <1>;
  			#size-cells = <0>;
  			clocks = <&gcc GCC_MDIO_AHB_CLK>;
-@@ -414,6 +416,22 @@
+@@ -412,6 +414,22 @@
  			interrupt-controller;
  			#interrupt-cells = <2>;
  

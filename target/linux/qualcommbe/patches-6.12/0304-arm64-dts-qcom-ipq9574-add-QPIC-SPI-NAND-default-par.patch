@@ -1,7 +1,7 @@
-From 2f328bd852cbb27cf0d2cad1727d8fb7a69abe87 Mon Sep 17 00:00:00 2001
+From a304a436ebf87ef3a7919d067ef6c4ae8c555b73 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Thu, 30 Jan 2025 00:39:30 +0100
-Subject: [PATCH 2/2] arm64: dts: qcom: ipq9574: add QPIC SPI NAND default
+Subject: [PATCH 304/360] arm64: dts: qcom: ipq9574: add QPIC SPI NAND default
  partition nodes
 
 Add QPIC SPI NAND default partition nodes for RDP reference board.
@@ -13,7 +13,7 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi
-@@ -281,6 +281,34 @@
+@@ -181,6 +181,34 @@
  		nand-ecc-engine = <&qpic_nand>;
  		nand-ecc-strength = <4>;
  		nand-ecc-step-size = <512>;

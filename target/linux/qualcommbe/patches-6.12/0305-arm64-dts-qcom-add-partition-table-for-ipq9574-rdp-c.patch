@@ -1,7 +1,7 @@
-From d9982d245fc7f1b7d65d74cd08d53eccdcbd5cf2 Mon Sep 17 00:00:00 2001
+From 15bc2e0af7914c08dff6507a7ba4cae512ce7a3c Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Mon, 9 Dec 2024 17:50:31 +0100
-Subject: [PATCH 1/2] arm64: dts: qcom: add partition table for ipq9574 rdp
+Subject: [PATCH 305/360] arm64: dts: qcom: add partition table for ipq9574 rdp
  common
 
 Add partition table for ipq9574 SoC common to every RDB board.
@@ -13,7 +13,7 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574-rdp-common.dtsi
-@@ -44,11 +44,155 @@
+@@ -74,11 +74,155 @@
  	status = "okay";
  
  	flash@0 {
