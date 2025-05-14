@@ -1,7 +1,8 @@
-From e7afacf09d39d7087a5ea112fefabb6d5d3adf2b Mon Sep 17 00:00:00 2001
+From 923c25c982fa7ec6a023b2ca58ffe305e39a4926 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Mon, 9 Dec 2024 18:10:43 +0100
-Subject: [PATCH] dts: qcom: add AQR NVMEM node for IPQ9574 RDP433 board
+Subject: [PATCH 356/360] arm64: dts: qcom: add AQR NVMEM node for IPQ9574
+ RDP433 board
 
 Add Aquantia NVMEM node for IPQ9574 RDP433 board to load the firmware
 for the Aquantia PHY.

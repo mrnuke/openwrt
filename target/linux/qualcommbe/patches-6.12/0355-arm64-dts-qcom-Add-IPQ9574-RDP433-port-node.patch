@@ -1,7 +1,7 @@
-From 9f3d547ccaf1113244f9aeb1a849e553321869ea Mon Sep 17 00:00:00 2001
+From 463ae80250be848ce0af5da7eb7b6765922a59db Mon Sep 17 00:00:00 2001
 From: Lei Wei <quic_leiwei@quicinc.com>
 Date: Tue, 14 May 2024 10:53:27 +0800
-Subject: [PATCH 17/17] arm64: dts: qcom: Add IPQ9574 RDP433 port node
+Subject: [PATCH 355/360] arm64: dts: qcom: Add IPQ9574 RDP433 port node
 
 There are 6 PPE MAC ports available on RDP433. The port1-port4 are
 connected with QCA8075 QUAD PHYs through UNIPHY0 PCS channel0-channel3.
@@ -12,9 +12,8 @@ channel0.
 Change-Id: Ic16efdef2fe2cff7b1e80245619c0f82afb24cb9
 Signed-off-by: Lei Wei <quic_leiwei@quicinc.com>
 ---
- arch/arm64/boot/dts/qcom/ipq9574-rdp433.dts | 169 +++++++++++++++++++-
- arch/arm64/boot/dts/qcom/ipq9574.dtsi       |   2 +-
- 2 files changed, 169 insertions(+), 2 deletions(-)
+ arch/arm64/boot/dts/qcom/ipq9574-rdp433.dts | 167 ++++++++++++++++++++
+ 1 file changed, 167 insertions(+)
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574-rdp433.dts
 +++ b/arch/arm64/boot/dts/qcom/ipq9574-rdp433.dts
@@ -196,14 +195,3 @@ Signed-off-by: Lei Wei <quic_leiwei@quicinc.com>
 +		};
 +	};
 +};
---- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-+++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-@@ -1256,7 +1256,7 @@
- 			#interconnect-cells = <1>;
- 		};
- 
--		ethernet@3a000000 {
-+		qcom_ppe: ethernet@3a000000 {
- 			compatible = "qcom,ipq9574-ppe";
- 			reg = <0x3a000000 0xbef800>;
- 			ranges;

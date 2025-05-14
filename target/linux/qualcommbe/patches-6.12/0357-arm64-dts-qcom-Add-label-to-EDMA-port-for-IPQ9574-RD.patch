@@ -1,7 +1,8 @@
-From a6118ebc98ec0081064ccc01d0d23f029a504d71 Mon Sep 17 00:00:00 2001
+From 07555e8980499f32cd169ad4e2800c1d4b9f321b Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Wed, 4 Dec 2024 01:49:09 +0100
-Subject: [PATCH] arm64: dts: qcom: Add label to EDMA port for IPQ9574 RDP433
+Subject: [PATCH 357/360] arm64: dts: qcom: Add label to EDMA port for IPQ9574
+ RDP433
 
 Add label to EDMA port for IPQ9574 RDP433 board.
 
