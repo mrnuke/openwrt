@@ -1,26 +1,43 @@
-From 893fda72edd2a0b3d92be41af417d315c9c5c253 Mon Sep 17 00:00:00 2001
+From dae47402e544d7545e1cf5097d85d4a82990f3c5 Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Thu, 30 Jan 2025 16:23:03 +0100
-Subject: [PATCH 3/3] arm64: dts: qcom: ipq9574: add NSSNOC clock to nss node
+Subject: [PATCH 359/360] arm64: dts: qcom: ipq9574: add NSSNOC clock to nss
+ node
 
 Add NSSNOC clock to nss node to attach the clock with PM clock and fix
 the boot stall after ICC sync_state.
 
 Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
+Alex G: Do not remove GCC_NSSCC_CLK ("bus") clock
+        Add clock-names for the new clocks
+Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/ipq9574.dtsi | 4 +++-
- 1 file changed, 3 insertions(+), 1 deletion(-)
+ arch/arm64/boot/dts/qcom/ipq9574.dtsi | 10 ++++++++--
+ 1 file changed, 8 insertions(+), 2 deletions(-)
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-@@ -1250,7 +1250,9 @@
- 				 <&pcsuniphy1 UNIPHY_NSS_TX_CLK>,
- 				 <&pcsuniphy2 UNIPHY_NSS_RX_CLK>,
- 				 <&pcsuniphy2 UNIPHY_NSS_TX_CLK>,
+@@ -1253,7 +1253,10 @@
+ 				 <&pcs_uniphy1 1>,
+ 				 <&pcs_uniphy2 0>,
+ 				 <&pcs_uniphy2 1>,
 -				 <&gcc GCC_NSSCC_CLK>;
++				 <&gcc GCC_NSSCC_CLK>,
 +				 <&gcc GCC_NSSNOC_NSSCC_CLK>,
 +				 <&gcc GCC_NSSNOC_SNOC_CLK>,
 +				 <&gcc GCC_NSSNOC_SNOC_1_CLK>;
+ 			clock-names = "xo",
+ 				      "nss_1200",
+ 				      "ppe_353",
+@@ -1264,7 +1267,10 @@
+ 				      "uniphy1_tx",
+ 				      "uniphy2_rx",
+ 				      "uniphy2_tx",
+-				      "bus";
++				      "bus",
++				      "nssnoc",
++				      "snoc",
++				      "snoc_1";
  			#clock-cells = <1>;
  			#reset-cells = <1>;
- 			#power-domain-cells = <1>;
+ 			#interconnect-cells = <1>;
