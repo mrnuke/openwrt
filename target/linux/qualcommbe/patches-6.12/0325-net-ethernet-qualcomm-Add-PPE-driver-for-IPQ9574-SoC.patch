@@ -1,7 +1,8 @@
-From a29ee27a42fc208ef1cd99f5014d57dbfe1af3dd Mon Sep 17 00:00:00 2001
+From cef6b7d3a8c34ac3b9f685299a44090d77adb13d Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
-Date: Tue, 26 Dec 2023 17:11:35 +0800
-Subject: [PATCH 18/50] net: ethernet: qualcomm: Add PPE driver for IPQ9574 SoC
+Date: Sun, 9 Feb 2025 22:29:37 +0800
+Subject: [PATCH 325/360] net: ethernet: qualcomm: Add PPE driver for IPQ9574
+ SoC
 
 The PPE (Packet Process Engine) hardware block is available
 on Qualcomm IPQ SoC that support PPE architecture, such as
@@ -15,23 +16,22 @@ in the SoC.
 
 The PPE also includes various packet processing offload
 capabilities such as L3 routing and L2 bridging, VLAN and
-tunnel processing offload. It also includes Ethernet DMA (EDMA)
-function for transferring packets between ARM cores and PPE
-ethernet ports.
+tunnel processing offload. It also includes Ethernet DMA
+function for transferring packets between ARM cores and
+PPE ethernet ports.
 
-This patch adds the base source files and Makefiles for the PPE
-driver such as platform driver registration, clock initialization,
-and PPE reset routines.
+This patch adds the base source files and Makefiles for
+the PPE driver such as platform driver registration,
+clock initialization, and PPE reset routines.
 
-Change-Id: I73166b5d4bb7e3c42ec6e0ac178a75528a25ef30
 Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 ---
  drivers/net/ethernet/qualcomm/Kconfig      |  15 ++
  drivers/net/ethernet/qualcomm/Makefile     |   1 +
  drivers/net/ethernet/qualcomm/ppe/Makefile |   7 +
- drivers/net/ethernet/qualcomm/ppe/ppe.c    | 225 +++++++++++++++++++++
+ drivers/net/ethernet/qualcomm/ppe/ppe.c    | 218 +++++++++++++++++++++
  drivers/net/ethernet/qualcomm/ppe/ppe.h    |  36 ++++
- 5 files changed, 284 insertions(+)
+ 5 files changed, 277 insertions(+)
  create mode 100644 drivers/net/ethernet/qualcomm/ppe/Makefile
  create mode 100644 drivers/net/ethernet/qualcomm/ppe/ppe.c
  create mode 100644 drivers/net/ethernet/qualcomm/ppe/ppe.h
@@ -49,7 +49,7 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +	select REGMAP_MMIO
 +	help
 +	  This driver supports the Qualcomm Technologies, Inc. packet
-+	  process engine (PPE) available with IPQ SoC. The PPE houses
++	  process engine (PPE) available with IPQ SoC. The PPE includes
 +	  the ethernet MACs, Ethernet DMA (EDMA) and switch core that
 +	  supports L3 flow offload, L2 switch function, RSS and tunnel
 +	  offload.
@@ -80,10 +80,10 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +qcom-ppe-objs := ppe.o
 --- /dev/null
 +++ b/drivers/net/ethernet/qualcomm/ppe/ppe.c
-@@ -0,0 +1,225 @@
+@@ -0,0 +1,218 @@
 +// SPDX-License-Identifier: GPL-2.0-only
 +/*
-+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
++ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
 + */
 +
 +/* PPE platform device probe, DTSI parser and PPE clock initializations. */
@@ -102,8 +102,8 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +#define PPE_PORT_MAX		8
 +#define PPE_CLK_RATE		353000000
 +
-+/* ICC clocks for enabling PPE device. The avg and peak with value 0
-+ * will be decided by the clock rate of PPE.
++/* ICC clocks for enabling PPE device. The avg_bw and peak_bw with value 0
++ * will be updated by the clock rate of PPE.
 + */
 +static const struct icc_bulk_data ppe_icc_data[] = {
 +	{
@@ -216,9 +216,9 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +	if (ret)
 +		return ret;
 +
-+	/* PPE clocks take the same clock tree, which work on the same
-+	 * clock rate. Setting the clock rate of "ppe" ensures the clock
-+	 * rate of all PPE clocks configured as same.
++	/* The PPE clocks have a common parent clock. Setting the clock
++	 * rate of "ppe" ensures the clock rate of all PPE clocks is
++	 * configured to the same rate.
 +	 */
 +	clk = devm_clk_get(dev, "ppe");
 +	if (IS_ERR(clk))
@@ -228,29 +228,23 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +	if (ret)
 +		return ret;
 +
-+	ret = devm_clk_bulk_get_all_enabled(dev, &clks);
++	ret = devm_clk_bulk_get_all_enable(dev, &clks);
 +	if (ret < 0)
 +		return ret;
 +
++	/* Reset the PPE. */
 +	rstc = devm_reset_control_get_exclusive(dev, NULL);
 +	if (IS_ERR(rstc))
 +		return PTR_ERR(rstc);
 +
-+	/* Reset PPE, the delay 100ms of assert and deassert is necessary
-+	 * for resetting PPE.
-+	 */
 +	ret = reset_control_assert(rstc);
 +	if (ret)
 +		return ret;
 +
-+	msleep(100);
-+	ret = reset_control_deassert(rstc);
-+	if (ret)
-+		return ret;
++	/* The delay 10 ms of assert is necessary for resetting PPE. */
++	usleep_range(10000, 11000);
 +
-+	msleep(100);
-+
-+	return 0;
++	return reset_control_deassert(rstc);
 +}
 +
 +static int qcom_ppe_probe(struct platform_device *pdev)
@@ -261,11 +255,10 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +	int ret, num_icc;
 +
 +	num_icc = ARRAY_SIZE(ppe_icc_data);
-+	ppe_dev = devm_kzalloc(dev,
-+			       struct_size(ppe_dev, icc_paths, num_icc),
++	ppe_dev = devm_kzalloc(dev, struct_size(ppe_dev, icc_paths, num_icc),
 +			       GFP_KERNEL);
 +	if (!ppe_dev)
-+		return dev_err_probe(dev, -ENOMEM, "PPE alloc memory failed\n");
++		return -ENOMEM;
 +
 +	base = devm_platform_ioremap_resource(pdev, 0);
 +	if (IS_ERR(base))
@@ -291,7 +284,7 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +
 +static const struct of_device_id qcom_ppe_of_match[] = {
 +	{ .compatible = "qcom,ipq9574-ppe" },
-+	{},
++	{}
 +};
 +MODULE_DEVICE_TABLE(of, qcom_ppe_of_match);
 +
@@ -305,13 +298,13 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +module_platform_driver(qcom_ppe_driver);
 +
 +MODULE_LICENSE("GPL");
-+MODULE_DESCRIPTION("Qualcomm IPQ PPE driver");
++MODULE_DESCRIPTION("Qualcomm Technologies, Inc. IPQ PPE driver");
 --- /dev/null
 +++ b/drivers/net/ethernet/qualcomm/ppe/ppe.h
 @@ -0,0 +1,36 @@
 +/* SPDX-License-Identifier: GPL-2.0-only
 + *
-+ * Copyright (c) 2024 Qualcomm Innovation Center, Inc. All rights reserved.
++ * Copyright (c) 2025 Qualcomm Innovation Center, Inc. All rights reserved.
 + */
 +
 +#ifndef __PPE_H__
