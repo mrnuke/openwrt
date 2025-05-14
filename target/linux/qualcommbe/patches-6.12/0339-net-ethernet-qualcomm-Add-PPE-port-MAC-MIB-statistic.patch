@@ -1,7 +1,7 @@
-From 3e8cb061bff0bf74503cd2f206ed5c599a1e7ff7 Mon Sep 17 00:00:00 2001
+From a0ae6fd002f7d8ad258cae8fbd1699c91020a265 Mon Sep 17 00:00:00 2001
 From: Lei Wei <quic_leiwei@quicinc.com>
 Date: Thu, 29 Feb 2024 20:16:14 +0800
-Subject: [PATCH 33/50] net: ethernet: qualcomm: Add PPE port MAC MIB
+Subject: [PATCH 339/360] net: ethernet: qualcomm: Add PPE port MAC MIB
  statistics functions
 
 Add PPE port MAC MIB statistics functions which are used by netdev
@@ -568,7 +568,7 @@ Signed-off-by: Lei Wei <quic_leiwei@quicinc.com>
  #endif
 --- a/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
 +++ b/drivers/net/ethernet/qualcomm/ppe/ppe_regs.h
-@@ -606,6 +606,48 @@
+@@ -618,6 +618,48 @@
  #define GMAC_MIB_CTRL_MASK			\
  	(GMAC_MIB_RD_CLR | GMAC_MIB_RST | GMAC_MIB_EN)
  
@@ -617,7 +617,7 @@ Signed-off-by: Lei Wei <quic_leiwei@quicinc.com>
  /* XGMAC TX configuration register */
  #define XGMAC_TX_CONFIG_ADDR			0x0
  #define XGMAC_SPEED_M				GENMASK(31, 29)
-@@ -668,4 +710,53 @@
+@@ -680,4 +722,53 @@
  #define XGMAC_MCF				BIT(3)
  #define XGMAC_CNTRST				BIT(0)
  

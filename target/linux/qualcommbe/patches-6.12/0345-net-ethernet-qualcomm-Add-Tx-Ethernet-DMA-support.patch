@@ -1,7 +1,7 @@
-From 1c2736afc17435d3bca18a84f9ed2620a5b03830 Mon Sep 17 00:00:00 2001
+From 15357813e0627588544962228c48916511000b11 Mon Sep 17 00:00:00 2001
 From: Suruchi Agarwal <quic_suruchia@quicinc.com>
 Date: Thu, 21 Mar 2024 16:26:29 -0700
-Subject: [PATCH 41/50] net: ethernet: qualcomm: Add Tx Ethernet DMA support
+Subject: [PATCH 345/360] net: ethernet: qualcomm: Add Tx Ethernet DMA support
 
 Add Tx queues, rings, descriptors configurations and
 DMA support for the EDMA.
@@ -29,11 +29,10 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
 --- a/drivers/net/ethernet/qualcomm/ppe/Makefile
 +++ b/drivers/net/ethernet/qualcomm/ppe/Makefile
 @@ -7,4 +7,4 @@ obj-$(CONFIG_QCOM_PPE) += qcom-ppe.o
- qcom-ppe-objs := ppe.o ppe_config.o ppe_api.o ppe_debugfs.o ppe_port.o
+ qcom-ppe-objs := ppe.o ppe_config.o ppe_debugfs.o ppe_port.o
  
  #EDMA
 -qcom-ppe-objs += edma.o edma_cfg_rx.o edma_port.o edma_rx.o
-\ No newline at end of file
 +qcom-ppe-objs += edma.o edma_cfg_rx.o edma_cfg_tx.o edma_port.o edma_rx.o edma_tx.o
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.c
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.c
@@ -245,13 +244,13 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.h
 @@ -7,6 +7,7 @@
  
- #include "ppe_api.h"
+ #include "ppe_config.h"
  #include "edma_rx.h"
 +#include "edma_tx.h"
  
  /* One clock cycle = 1/(EDMA clock frequency in Mhz) micro seconds.
   *
-@@ -94,8 +95,11 @@ struct edma_intr_info {
+@@ -104,8 +105,11 @@ struct edma_intr_info {
   * @intr_info: EDMA Interrupt info
   * @rxfill_rings: Rx fill Rings, SW is producer
   * @rx_rings: Rx Desc Rings, SW is consumer
@@ -263,7 +262,7 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
   */
  struct edma_context {
  	struct net_device **netdev_arr;
-@@ -105,8 +109,11 @@ struct edma_context {
+@@ -115,8 +119,11 @@ struct edma_context {
  	struct edma_intr_info intr_info;
  	struct edma_rxfill_ring *rxfill_rings;
  	struct edma_rxdesc_ring *rx_rings;

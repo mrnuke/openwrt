@@ -1,8 +1,8 @@
-From cf3e71b3c8bd63cd832c0512386700cac6a2c363 Mon Sep 17 00:00:00 2001
+From 87391a2cc0cb8e287cfb98e95dcba809011b8a81 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Tue, 5 Mar 2024 16:42:56 +0800
-Subject: [PATCH 35/50] net: ethernet: qualcomm: Add API to configure PPE port
- max frame size
+Subject: [PATCH 341/360] net: ethernet: qualcomm: Add API to configure PPE
+ port max frame size
 
 This function is called when the MTU of an ethernet port is
 configured. It limits the size of packet passed through the
@@ -73,6 +73,6 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 @@ -89,4 +89,5 @@ void ppe_port_get_stats64(struct ppe_por
  			  struct rtnl_link_stats64 *s);
  int ppe_port_set_mac_address(struct ppe_port *ppe_port, const u8 *addr);
- int ppe_port_set_mac_eee(struct ppe_port *ppe_port, struct ethtool_eee *eee);
+ int ppe_port_set_mac_eee(struct ppe_port *ppe_port, struct ethtool_keee *eee);
 +int ppe_port_set_maxframe(struct ppe_port *ppe_port, int maxframe_size);
  #endif

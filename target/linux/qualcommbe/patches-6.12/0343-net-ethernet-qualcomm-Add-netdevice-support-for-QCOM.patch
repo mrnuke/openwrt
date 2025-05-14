@@ -1,8 +1,8 @@
-From cbcaf81cd148b77ee0570a482b536f269a9f6657 Mon Sep 17 00:00:00 2001
+From 4766086b237a95b45d8ba1bd3e9daa36a0a23073 Mon Sep 17 00:00:00 2001
 From: Suruchi Agarwal <quic_suruchia@quicinc.com>
 Date: Thu, 21 Mar 2024 16:14:46 -0700
-Subject: [PATCH 39/50] net: ethernet: qualcomm: Add netdevice support for QCOM
- IPQ9574 chipset.
+Subject: [PATCH 343/360] net: ethernet: qualcomm: Add netdevice support for
+ QCOM IPQ9574 chipset.
 
 Add EDMA ports and netdevice operations for QCOM IPQ9574 chipset.
 
@@ -23,13 +23,11 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
 --- a/drivers/net/ethernet/qualcomm/ppe/Makefile
 +++ b/drivers/net/ethernet/qualcomm/ppe/Makefile
 @@ -7,4 +7,4 @@ obj-$(CONFIG_QCOM_PPE) += qcom-ppe.o
- qcom-ppe-objs := ppe.o ppe_config.o ppe_api.o ppe_debugfs.o ppe_port.o
+ qcom-ppe-objs := ppe.o ppe_config.o ppe_debugfs.o ppe_port.o
  
  #EDMA
 -qcom-ppe-objs += edma.o
-\ No newline at end of file
 +qcom-ppe-objs += edma.o edma_port.o
-\ No newline at end of file
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.h
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.h
 @@ -26,6 +26,9 @@
@@ -40,8 +38,8 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
 +#define EDMA_START_IFNUM   1
 +
  /**
-  * struct edma_ring_info - EDMA ring data structure.
-  * @max_rings: Maximum number of rings
+  * enum ppe_queue_class_type - PPE queue class type
+  * @PPE_QUEUE_CLASS_PRIORITY: Queue offset configured from internal priority
 --- /dev/null
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma_port.c
 @@ -0,0 +1,270 @@

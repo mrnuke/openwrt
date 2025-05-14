@@ -1,7 +1,7 @@
-From 14caaa7a23404cfee65a0d74b61d7998f762c70f Mon Sep 17 00:00:00 2001
+From d2532a3d1b2e8beee6399af64875d9273b0057d5 Mon Sep 17 00:00:00 2001
 From: Pavithra R <quic_pavir@quicinc.com>
 Date: Wed, 6 Mar 2024 22:29:41 +0530
-Subject: [PATCH 16/17] arm64: dts: qcom: Add EDMA node for IPQ9574
+Subject: [PATCH 354/360] arm64: dts: qcom: Add EDMA node for IPQ9574
 
 Add EDMA (Ethernet DMA) device tree node for IPQ9574 to
 enable ethernet support.
@@ -14,7 +14,7 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-@@ -1292,6 +1292,74 @@
+@@ -1306,6 +1306,74 @@
  					     "nssnoc_memnoc",
  					     "memnoc_nssnoc",
  					     "memnoc_nssnoc_1";
@@ -88,4 +88,4 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
 +			};
  		};
  
- 		pcsuniphy0: ethernet-uniphy@7a00000 {
+ 		pcs_uniphy0: ethernet-pcs@7a00000 {

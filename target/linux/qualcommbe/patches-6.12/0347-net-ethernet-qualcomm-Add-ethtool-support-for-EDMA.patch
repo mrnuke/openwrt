@@ -1,12 +1,14 @@
-From ec30075badd13a3e2ffddd1c5dcb40e3c52202ed Mon Sep 17 00:00:00 2001
+From 9c113f350006f190266ef303586b0ced5f5c3864 Mon Sep 17 00:00:00 2001
 From: Pavithra R <quic_pavir@quicinc.com>
 Date: Thu, 30 May 2024 20:46:36 +0530
-Subject: [PATCH 43/50] net: ethernet: qualcomm: Add ethtool support for EDMA
+Subject: [PATCH 347/360] net: ethernet: qualcomm: Add ethtool support for EDMA
 
 ethtool ops can be used for EDMA netdevice configuration and statistics.
 
 Change-Id: I57fc19415dacbe51fed000520336463938220609
 Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
+Alex G: use struct ethtool_keee instead of ethtool_eee
+Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
  drivers/net/ethernet/qualcomm/ppe/Makefile    |   2 +-
  drivers/net/ethernet/qualcomm/ppe/edma.h      |   1 +
@@ -18,19 +20,21 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
 --- a/drivers/net/ethernet/qualcomm/ppe/Makefile
 +++ b/drivers/net/ethernet/qualcomm/ppe/Makefile
 @@ -7,4 +7,4 @@ obj-$(CONFIG_QCOM_PPE) += qcom-ppe.o
- qcom-ppe-objs := ppe.o ppe_config.o ppe_api.o ppe_debugfs.o ppe_port.o
+ qcom-ppe-objs := ppe.o ppe_config.o ppe_debugfs.o ppe_port.o
  
  #EDMA
 -qcom-ppe-objs += edma.o edma_cfg_rx.o edma_cfg_tx.o edma_debugfs.o edma_port.o edma_rx.o edma_tx.o
 +qcom-ppe-objs += edma.o edma_cfg_rx.o edma_cfg_tx.o edma_debugfs.o edma_port.o edma_rx.o edma_tx.o edma_ethtool.o
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.h
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.h
-@@ -151,4 +151,5 @@ void edma_destroy(struct ppe_device *ppe
+@@ -161,6 +161,7 @@ void edma_destroy(struct ppe_device *ppe
  int edma_setup(struct ppe_device *ppe_dev);
  void edma_debugfs_teardown(void);
  int edma_debugfs_setup(struct ppe_device *ppe_dev);
 +void edma_set_ethtool_ops(struct net_device *netdev);
- #endif
+ int ppe_edma_queue_offset_config(struct ppe_device *ppe_dev,
+ 				 enum ppe_queue_class_type class,
+ 				 int index, int queue_offset);
 --- /dev/null
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma_ethtool.c
 @@ -0,0 +1,294 @@
@@ -278,7 +282,7 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
 +	return phylink_ethtool_set_pauseparam(port->phylink, pause);
 +}
 +
-+static int edma_get_eee(struct net_device *netdev, struct ethtool_eee *eee)
++static int edma_get_eee(struct net_device *netdev, struct ethtool_keee *eee)
 +{
 +	struct edma_port_priv *port_priv = (struct edma_port_priv *)netdev_priv(netdev);
 +	struct ppe_port *port =  port_priv->ppe_port;
@@ -289,7 +293,7 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
 +	return phylink_ethtool_get_eee(port->phylink, eee);
 +}
 +
-+static int edma_set_eee(struct net_device *netdev, struct ethtool_eee *eee)
++static int edma_set_eee(struct net_device *netdev, struct ethtool_keee *eee)
 +{
 +	struct edma_port_priv *port_priv = (struct edma_port_priv *)netdev_priv(netdev);
 +	struct ppe_port *port =  port_priv->ppe_port;

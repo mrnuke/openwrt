@@ -1,7 +1,7 @@
-From a36607b554841358733167483d194ae7d3969444 Mon Sep 17 00:00:00 2001
+From 4587876684210e2d058f9a80ea090e6329a37eae Mon Sep 17 00:00:00 2001
 From: Pavithra R <quic_pavir@quicinc.com>
 Date: Tue, 11 Jun 2024 01:43:22 +0530
-Subject: [PATCH 45/50] net: ethernet: qualcomm: Add sysctl for RPS bitmap
+Subject: [PATCH 349/360] net: ethernet: qualcomm: Add sysctl for RPS bitmap
 
 Add sysctl to configure RPS bitmap for EDMA receive.
 This bitmap is used to configure the set of ARM cores
@@ -9,12 +9,14 @@ used to receive packets from EDMA.
 
 Change-Id: Ie0e7d5971db93ea1494608a9e79c4abb13ce69b6
 Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
+Alex G: Use **const** ctl_table argument for .proc_handler
+Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
  drivers/net/ethernet/qualcomm/ppe/edma.c      | 23 ++++++++++++++++
  drivers/net/ethernet/qualcomm/ppe/edma.h      |  2 ++
  .../net/ethernet/qualcomm/ppe/edma_cfg_rx.c   | 27 +++++++++++++++++++
- .../net/ethernet/qualcomm/ppe/edma_cfg_rx.h   |  4 +++
- 4 files changed, 56 insertions(+)
+ .../net/ethernet/qualcomm/ppe/edma_cfg_rx.h   |  6 ++++-
+ 4 files changed, 57 insertions(+), 1 deletion(-)
 
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.c
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.c
@@ -64,7 +66,7 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
  	if (ret) {
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.h
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.h
-@@ -122,6 +122,7 @@ struct edma_intr_info {
+@@ -132,6 +132,7 @@ struct edma_intr_info {
   * @tx_rings: Tx Descriptor Ring, SW is producer
   * @txcmpl_rings: Tx complete Ring, SW is consumer
   * @err_stats: Per CPU error statistics
@@ -72,7 +74,7 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
   * @rx_page_mode: Page mode enabled or disabled
   * @rx_buf_size: Rx buffer size for Jumbo MRU
   * @tx_requeue_stop: Tx requeue stop enabled or disabled
-@@ -137,6 +138,7 @@ struct edma_context {
+@@ -147,6 +148,7 @@ struct edma_context {
  	struct edma_txdesc_ring *tx_rings;
  	struct edma_txcmpl_ring *txcmpl_rings;
  	struct edma_err_stats __percpu *err_stats;
@@ -97,7 +99,7 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
  }
 +
 +/* Configure RPS hash mapping based on bitmap */
-+int edma_cfg_rx_rps_bitmap(struct ctl_table *table, int write,
++int edma_cfg_rx_rps_bitmap(const struct ctl_table *table, int write,
 +			   void *buffer, size_t *lenp, loff_t *ppos)
 +{
 +	int ret;
@@ -131,10 +133,13 @@ Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
  int edma_cfg_rx_rings(void);
  int edma_cfg_rx_rings_alloc(void);
  void edma_cfg_rx_ring_mappings(void);
-@@ -66,4 +68,6 @@ void edma_cfg_rx_buff_size_setup(void);
+@@ -64,6 +66,8 @@ void edma_cfg_rx_rings_enable(void);
+ void edma_cfg_rx_rings_disable(void);
+ void edma_cfg_rx_buff_size_setup(void);
  int edma_cfg_rx_rps_hash_map(void);
- int edma_cfg_rx_rps(struct ctl_table *table, int write,
+-int edma_cfg_rx_rps(struct ctl_table *table, int write,
++int edma_cfg_rx_rps(const struct ctl_table *table, int write,
  		    void *buffer, size_t *lenp, loff_t *ppos);
-+int edma_cfg_rx_rps_bitmap(struct ctl_table *table, int write,
++int edma_cfg_rx_rps_bitmap(const struct ctl_table *table, int write,
 +			   void *buffer, size_t *lenp, loff_t *ppos);
  #endif

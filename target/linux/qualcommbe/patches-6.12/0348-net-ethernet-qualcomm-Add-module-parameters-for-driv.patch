@@ -1,7 +1,7 @@
-From c9ad8286ca39c2545f6a6851a8ede8488a9263f3 Mon Sep 17 00:00:00 2001
+From bd2e8d237164a1329a53a957e27bc031314f38ae Mon Sep 17 00:00:00 2001
 From: Pavithra R <quic_pavir@quicinc.com>
 Date: Tue, 11 Jun 2024 00:00:46 +0530
-Subject: [PATCH 44/50] net: ethernet: qualcomm: Add module parameters for
+Subject: [PATCH 348/360] net: ethernet: qualcomm: Add module parameters for
  driver tunings
 
 Add module params and corresponding functionality for Tx/Rx

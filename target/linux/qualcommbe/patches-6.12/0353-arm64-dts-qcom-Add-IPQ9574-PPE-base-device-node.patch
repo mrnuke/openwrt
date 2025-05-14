@@ -1,7 +1,7 @@
-From ff847b8692e877e660b64ff2de4f26c6f7ce932e Mon Sep 17 00:00:00 2001
+From 5993043c826520f42b360d77401d3f3dfbb31328 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Fri, 1 Mar 2024 14:46:45 +0800
-Subject: [PATCH 14/17] arm64: dts: qcom: Add IPQ9574 PPE base device node
+Subject: [PATCH 353/360] arm64: dts: qcom: Add IPQ9574 PPE base device node
 
 PPE is the packet process engine on the Qualcomm IPQ platform,
 which is connected with the external switch or PHY device via
@@ -9,17 +9,27 @@ the UNIPHY (PCS).
 
 Change-Id: I254bd48c218aa4eab54f697a2ad149f5a93b682c
 Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
+Alex G: Add "qcom_ppe" label to PPE node
+Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
- arch/arm64/boot/dts/qcom/ipq9574.dtsi | 38 +++++++++++++++++++++++++++
- 1 file changed, 38 insertions(+)
+ arch/arm64/boot/dts/qcom/ipq9574.dtsi | 39 +++++++++++++++++++++++++++
+ 1 file changed, 39 insertions(+)
 
 --- a/arch/arm64/boot/dts/qcom/ipq9574.dtsi
 +++ b/arch/arm64/boot/dts/qcom/ipq9574.dtsi
-@@ -1256,6 +1256,44 @@
+@@ -13,6 +13,7 @@
+ #include <dt-bindings/interconnect/qcom,ipq9574.h>
+ #include <dt-bindings/interrupt-controller/arm-gic.h>
+ #include <dt-bindings/reset/qcom,ipq9574-gcc.h>
++#include <dt-bindings/reset/qcom,ipq9574-nsscc.h>
+ #include <dt-bindings/thermal/thermal.h>
+ 
+ / {
+@@ -1269,6 +1270,44 @@
  			#interconnect-cells = <1>;
  		};
  
-+		ethernet@3a000000 {
++		qcom_ppe: ethernet@3a000000 {
 +			compatible = "qcom,ipq9574-ppe";
 +			reg = <0x3a000000 0xbef800>;
 +			ranges;
@@ -57,6 +67,6 @@ Signed-off-by: Luo Jie <quic_luoj@quicinc.com>
 +					     "memnoc_nssnoc_1";
 +		};
 +
- 		pcsuniphy0: ethernet-uniphy@7a00000 {
- 			#address-cells = <1>;
- 			#size-cells = <0>;
+ 		pcs_uniphy0: ethernet-pcs@7a00000 {
+ 			compatible = "qcom,ipq9574-pcs";
+ 			reg = <0x7a00000 0x10000>;

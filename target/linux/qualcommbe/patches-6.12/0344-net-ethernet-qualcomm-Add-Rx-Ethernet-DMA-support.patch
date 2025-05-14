@@ -1,7 +1,7 @@
-From 7c7baa32e0d110d5446113f5513fca84731bddd3 Mon Sep 17 00:00:00 2001
+From a29e3cdfe8fc46a62acfd62bba638fec80f7d6e9 Mon Sep 17 00:00:00 2001
 From: Suruchi Agarwal <quic_suruchia@quicinc.com>
 Date: Thu, 21 Mar 2024 16:21:19 -0700
-Subject: [PATCH 40/50] net: ethernet: qualcomm: Add Rx Ethernet DMA support
+Subject: [PATCH 344/360] net: ethernet: qualcomm: Add Rx Ethernet DMA support
 
 Add Rx queues, rings, descriptors configurations and
 DMA support for the EDMA.
@@ -10,17 +10,21 @@ Change-Id: I612bcd661e74d5bf3ecb33de10fd5298d18ff7e9
 Co-developed-by: Pavithra R <quic_pavir@quicinc.com>
 Signed-off-by: Pavithra R <quic_pavir@quicinc.com>
 Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
+Alex G: add missing functions that were previously in ppe_api.c:
+        - ppe_edma_queue_resource_get()
+        - ppe_edma_ring_to_queues_config()
+Signed-off-by: Alexandru Gagniuc <mr.nuke.me@gmail.com>
 ---
  drivers/net/ethernet/qualcomm/ppe/Makefile    |   2 +-
- drivers/net/ethernet/qualcomm/ppe/edma.c      | 171 +++-
- drivers/net/ethernet/qualcomm/ppe/edma.h      |  18 +-
+ drivers/net/ethernet/qualcomm/ppe/edma.c      | 214 +++-
+ drivers/net/ethernet/qualcomm/ppe/edma.h      |  22 +-
  .../net/ethernet/qualcomm/ppe/edma_cfg_rx.c   | 964 ++++++++++++++++++
  .../net/ethernet/qualcomm/ppe/edma_cfg_rx.h   |  48 +
  drivers/net/ethernet/qualcomm/ppe/edma_port.c |  39 +-
  drivers/net/ethernet/qualcomm/ppe/edma_port.h |  31 +
  drivers/net/ethernet/qualcomm/ppe/edma_rx.c   | 622 +++++++++++
  drivers/net/ethernet/qualcomm/ppe/edma_rx.h   | 287 ++++++
- 9 files changed, 2177 insertions(+), 5 deletions(-)
+ 9 files changed, 2224 insertions(+), 5 deletions(-)
  create mode 100644 drivers/net/ethernet/qualcomm/ppe/edma_cfg_rx.c
  create mode 100644 drivers/net/ethernet/qualcomm/ppe/edma_cfg_rx.h
  create mode 100644 drivers/net/ethernet/qualcomm/ppe/edma_rx.c
@@ -29,13 +33,11 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
 --- a/drivers/net/ethernet/qualcomm/ppe/Makefile
 +++ b/drivers/net/ethernet/qualcomm/ppe/Makefile
 @@ -7,4 +7,4 @@ obj-$(CONFIG_QCOM_PPE) += qcom-ppe.o
- qcom-ppe-objs := ppe.o ppe_config.o ppe_api.o ppe_debugfs.o ppe_port.o
+ qcom-ppe-objs := ppe.o ppe_config.o ppe_debugfs.o ppe_port.o
  
  #EDMA
 -qcom-ppe-objs += edma.o edma_port.o
-\ No newline at end of file
 +qcom-ppe-objs += edma.o edma_cfg_rx.o edma_port.o edma_rx.o
-\ No newline at end of file
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.c
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.c
 @@ -18,12 +18,23 @@
@@ -283,12 +285,59 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
  	dev_info(dev, "EDMA configuration successful\n");
  
  	return 0;
+@@ -478,3 +645,46 @@ int ppe_edma_queue_offset_config(struct
+ 	return ppe_queue_ucast_offset_hash_set(ppe_dev, 0,
+ 					       index, queue_offset);
+ }
++
++/**
++ * ppe_edma_queue_resource_get - Get EDMA queue resource
++ * @ppe_dev: PPE device
++ * @type: Resource type
++ * @res_start: Resource start ID returned
++ * @res_end: Resource end ID returned
++ *
++ * PPE EDMA queue resource includes unicast queue and multicast queue.
++ *
++ * Return 0 on success, negative error code on failure.
++ */
++int ppe_edma_queue_resource_get(struct ppe_device *ppe_dev, int type,
++				int *res_start, int *res_end)
++{
++	if (type != PPE_RES_UCAST && type != PPE_RES_MCAST)
++		return -EINVAL;
++
++	return ppe_port_resource_get(ppe_dev, 0, type, res_start, res_end);
++};
++
++/**
++ * ppe_edma_ring_to_queues_config - Map EDMA ring to PPE queues
++ * @ppe_dev: PPE device
++ * @ring_id: EDMA ring ID
++ * @num: Number of queues mapped to EDMA ring
++ * @queues: PPE queue IDs
++ *
++ * PPE queues are configured to map with the special EDMA ring ID.
++ *
++ * Return 0 on success, negative error code on failure.
++ */
++int ppe_edma_ring_to_queues_config(struct ppe_device *ppe_dev, int ring_id,
++				   int num, int queues[] __counted_by(num))
++{
++	u32 queue_bmap[PPE_RING_TO_QUEUE_BITMAP_WORD_CNT] = {};
++	int index;
++
++	for (index = 0; index < num; index++)
++		queue_bmap[queues[index] / 32] |= BIT_MASK(queues[index] % 32);
++
++	return ppe_ring_queue_map_set(ppe_dev, ring_id, queue_bmap);
++}
 --- a/drivers/net/ethernet/qualcomm/ppe/edma.h
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma.h
 @@ -6,6 +6,7 @@
  #define __EDMA_MAIN__
  
- #include "ppe_api.h"
+ #include "ppe_config.h"
 +#include "edma_rx.h"
  
  /* One clock cycle = 1/(EDMA clock frequency in Mhz) micro seconds.
@@ -303,9 +352,9 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
 +			(max)) & ((max) - 1)); })
 +
  /**
-  * struct edma_ring_info - EDMA ring data structure.
-  * @max_rings: Maximum number of rings
-@@ -82,18 +88,28 @@ struct edma_intr_info {
+  * enum ppe_queue_class_type - PPE queue class type
+  * @PPE_QUEUE_CLASS_PRIORITY: Queue offset configured from internal priority
+@@ -92,18 +98,28 @@ struct edma_intr_info {
  /**
   * struct edma_context - EDMA context.
   * @netdev_arr: Net device for each EDMA port
@@ -335,6 +384,17 @@ Signed-off-by: Suruchi Agarwal <quic_suruchia@quicinc.com>
  extern struct edma_context *edma_ctx;
  
  void edma_destroy(struct ppe_device *ppe_dev);
+@@ -111,6 +127,10 @@ int edma_setup(struct ppe_device *ppe_de
+ int ppe_edma_queue_offset_config(struct ppe_device *ppe_dev,
+ 				 enum ppe_queue_class_type class,
+ 				 int index, int queue_offset);
++int ppe_edma_queue_resource_get(struct ppe_device *ppe_dev, int type,
++				int *res_start, int *res_end);
++int ppe_edma_ring_to_queues_config(struct ppe_device *ppe_dev, int ring_id,
++				   int num, int queues[] __counted_by(num));
+ 
+ 
+ #endif
 --- /dev/null
 +++ b/drivers/net/ethernet/qualcomm/ppe/edma_cfg_rx.c
 @@ -0,0 +1,964 @@

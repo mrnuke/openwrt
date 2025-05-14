@@ -1,8 +1,8 @@
-From cb72c5119463897df2ba4a007b490e6251a15f75 Mon Sep 17 00:00:00 2001
+From ff9aef8ff297cf2cfe116153f19c86cd3b059b2a Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Wed, 4 Dec 2024 01:37:05 +0100
-Subject: [PATCH] net: ethernet: qualcomm: Add support for label property for
- EDMA port
+Subject: [PATCH 350/360] net: ethernet: qualcomm: Add support for label
+ property for EDMA port
 
 Add support for label property for EDMA port. This is useful to define
 custom name in DTS for specific ethernet port instead of assigning a

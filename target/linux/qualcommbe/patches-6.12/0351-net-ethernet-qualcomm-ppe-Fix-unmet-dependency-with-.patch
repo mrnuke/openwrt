@@ -1,8 +1,8 @@
-From a0a04487554ea21db5eaf04f81fc159386a7477d Mon Sep 17 00:00:00 2001
+From 62b56bac4b20b05aa888e126b39c9f0f2d73fc6e Mon Sep 17 00:00:00 2001
 From: Christian Marangi <ansuelsmth@gmail.com>
 Date: Mon, 9 Dec 2024 18:19:06 +0100
-Subject: [PATCH] net: ethernet: qualcomm: ppe: Fix unmet dependency with
- QCOM_PPE
+Subject: [PATCH 351/360] net: ethernet: qualcomm: ppe: Fix unmet dependency
+ with QCOM_PPE
 
 Fix unmet dependency with QCOM_PPE on selecting SFP.
 
@@ -27,4 +27,4 @@ Signed-off-by: Christian Marangi <ansuelsmth@gmail.com>
 -	select SFP
  	help
  	  This driver supports the Qualcomm Technologies, Inc. packet
- 	  process engine (PPE) available with IPQ SoC. The PPE houses
+ 	  process engine (PPE) available with IPQ SoC. The PPE includes
