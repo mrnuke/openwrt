@@ -1,8 +1,8 @@
-From d9b391e7b695b7de04c4363b5ec9ffaaed387353 Mon Sep 17 00:00:00 2001
+From 3223a3a09d4bd9f4b0cb762a5e580c19cf677518 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Wed, 8 Nov 2023 18:01:14 +0800
-Subject: [PATCH 04/50] net: phy: qca808x: Add link_change_notify function for
- QCA8084
+Subject: [PATCH 309/360] net: phy: qca808x: Add link_change_notify function
+ for QCA8084
 
 When the link is changed, QCA8084 needs to do the fifo reset and
 adjust the IPG level for the 10G-QXGMII link on the speed 1000M.

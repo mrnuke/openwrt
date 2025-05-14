@@ -1,7 +1,8 @@
-From 9e76817056937645205f23ee91e762d5cff5e848 Mon Sep 17 00:00:00 2001
+From 1dc396b1bb7dfe26662398ccaef6ff158954c55a Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Mon, 29 Jan 2024 17:57:20 +0800
-Subject: [PATCH 01/50] dt-bindings: net: Document Qualcomm QCA8084 PHY package
+Subject: [PATCH 306/360] dt-bindings: net: Document Qualcomm QCA8084 PHY
+ package
 
 QCA8084 is quad PHY chip, which integrates 4 PHYs, 2 PCS
 interfaces (PCS0 and PCS1) and clock controller, which can

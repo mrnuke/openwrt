@@ -1,8 +1,8 @@
-From 9443d85d8f3e397b025700251516e248fc4e37c0 Mon Sep 17 00:00:00 2001
+From 634f00d8d198d51e4354e9869511f571df8a68ed Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Wed, 29 Nov 2023 15:21:22 +0800
-Subject: [PATCH 05/50] net: phy: qca808x: Add register access support routines
- for QCA8084
+Subject: [PATCH 310/360] net: phy: qca808x: Add register access support
+ routines for QCA8084
 
 QCA8084 integrates clock controller and security control modules
 besides of the PHY and PCS. The 32bit registers in these modules

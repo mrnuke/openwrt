@@ -1,7 +1,7 @@
-From 9d0e22124d6f3ca901626dd5537b36c7c0c97812 Mon Sep 17 00:00:00 2001
+From fc74d56b6da0009529cf865c9e75cd0d00902a2f Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Mon, 29 Jan 2024 10:51:38 +0800
-Subject: [PATCH 06/50] net: phy: qca808x: Add QCA8084 probe function
+Subject: [PATCH 311/360] net: phy: qca808x: Add QCA8084 probe function
 
 Add the PHY package probe function. The MDIO slave address of
 PHY, PCS and XPCS can be optionally customized by configuring

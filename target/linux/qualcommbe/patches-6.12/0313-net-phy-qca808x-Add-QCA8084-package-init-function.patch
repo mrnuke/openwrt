@@ -1,7 +1,7 @@
-From 392a648b7b0324d03e6f6a7b326e33136d79b134 Mon Sep 17 00:00:00 2001
+From 2ed21036efa274304e9b7fe885631abe0cc0290f Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Thu, 25 Jan 2024 17:13:24 +0800
-Subject: [PATCH 08/50] net: phy: qca808x: Add QCA8084 package init function
+Subject: [PATCH 313/360] net: phy: qca808x: Add QCA8084 package init function
 
 The package mode of PHY is configured for the interface mode of two
 PCSes working correctly.

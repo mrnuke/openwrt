@@ -1,7 +1,8 @@
-From fd5ec7c0a9f7167baf377a4bbae72eda391df996 Mon Sep 17 00:00:00 2001
+From 35174ed44d44efb3fceef062a7721fe12f148662 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Wed, 8 Nov 2023 16:18:02 +0800
-Subject: [PATCH 03/50] net: phy: qca808x: Add config_init function for QCA8084
+Subject: [PATCH 308/360] net: phy: qca808x: Add config_init function for
+ QCA8084
 
 1. The ADC of QCA8084 PHY must be configured as edge inverted
 and falling whenever it is initialized or reset. In addition,

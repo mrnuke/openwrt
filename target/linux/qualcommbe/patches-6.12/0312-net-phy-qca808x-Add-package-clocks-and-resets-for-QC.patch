@@ -1,7 +1,7 @@
-From 324c5b908a5294390ed9659a6439758cb20ecd61 Mon Sep 17 00:00:00 2001
+From d712899c8e2c109678762c450429283fd2754edf Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Tue, 9 Apr 2024 16:30:55 +0800
-Subject: [PATCH 07/50] net: phy: qca808x: Add package clocks and resets for
+Subject: [PATCH 312/360] net: phy: qca808x: Add package clocks and resets for
  QCA8084
 
 Parse the PHY package clocks from the PHY package DTS node.

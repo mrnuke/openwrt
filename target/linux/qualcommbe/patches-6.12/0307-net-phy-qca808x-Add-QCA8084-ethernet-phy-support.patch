@@ -1,7 +1,7 @@
-From 9dec04efa81322029e210281b1753a2eb5279e27 Mon Sep 17 00:00:00 2001
+From bc5fa623d4ff089f9b6bcfba2d4685dff0b65a44 Mon Sep 17 00:00:00 2001
 From: Luo Jie <quic_luoj@quicinc.com>
 Date: Thu, 6 Apr 2023 18:09:07 +0800
-Subject: [PATCH 02/50] net: phy: qca808x: Add QCA8084 ethernet phy support
+Subject: [PATCH 307/360] net: phy: qca808x: Add QCA8084 ethernet phy support
 
 Add QCA8084 Quad-PHY support, which is a four-port PHY with
 maximum link capability of 2.5 Gbps. The features of each port
